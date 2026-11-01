@@ -4,6 +4,8 @@ Start with the analyst’s task. For a bug, describe what you tried, what you ex
 
 For clone, update and pull request instructions, follow the [repository guide](docs/repository-guide.md). The [software guide](docs/software-guide.md) provides the first-use exercise.
 
+Before starting a larger change, identify the relevant work item in the [execution plan](docs/execution-plan.md). Keep planned capabilities distinct from those already shipped, and link completion evidence when updating the plan.
+
 For Evidence Check, open `tools/evidence-check.html` directly in a desktop or mobile browser. Run `node --test tools/tests/evidence-check.test.mjs` with Node.js 22 or newer. Check both a matching file and a modified file in a browser with its network connection disabled.
 
 In a pull request, describe the change and the checks you ran. Keep test evidence synthetic or explicitly redistributable. Identify third-party material and its license. Disclose material AI assistance and review the result. Contributions you intentionally submit for inclusion are offered under Apache-2.0 as described in section 5 unless you explicitly state otherwise. [License](LICENSE)

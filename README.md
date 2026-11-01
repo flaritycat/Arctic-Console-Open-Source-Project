@@ -10,6 +10,7 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 
 ## Guides
 
+- [Roadmap](ROADMAP.md) and [execution plan](docs/execution-plan.md) describe the next deliveries, dependencies and completion criteria.
 - [Use the software](docs/software-guide.md) for the sample exercise, real evidence checks, saved records and troubleshooting.
 - [Use the repository](docs/repository-guide.md) for releases, source files, updates and contributions.
 

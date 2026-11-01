@@ -19,6 +19,7 @@ The full Investigation and Operations source remains in private review while its
 | Location | Purpose |
 | --- | --- |
 | `README.md` | Project introduction and links to the tool and release |
+| `ROADMAP.md` and `docs/execution-plan.md` | Current delivery stages, work priorities, dependencies and completion evidence |
 | `docs/software-guide.md` | How to complete a check and use its result |
 | `tools/evidence-check.html` | The standalone application, including its interface and JavaScript |
 | `tools/examples/sample-observation.txt` | The fictional sample used by the exercise and tests |
