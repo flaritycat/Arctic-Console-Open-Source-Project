@@ -1,0 +1,130 @@
+<!doctype html>
+<!-- Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0 -->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Evidence Check · Arctic Console</title>
+<style>
+:root {color-scheme:light; font:100%/1.55 system-ui,sans-serif; color:#132f3c; background:#f2f6f6}
+* {box-sizing:border-box}
+body {margin:0}
+main {max-width:42rem; margin:0 auto; padding:clamp(1rem,5vw,3rem) 1rem 2rem}
+header {border-top:4px solid #087065; padding-top:1rem}
+.brand {color:#356064; font-size:.78rem; font-weight:720; letter-spacing:.13em; text-transform:uppercase}
+h1 {font-size:clamp(2.25rem,7vw,3.4rem); line-height:1.04; letter-spacing:-.045em; margin:.7rem 0}
+h2 {line-height:1.25; margin:0; font-size:1.18rem}
+p {margin:.45rem 0 1rem}
+form {background:white; border:1px solid #b9cecb; border-radius:.7rem; padding:clamp(1rem,4vw,1.65rem); margin:1.25rem 0}
+label {display:block; font-weight:700; margin-bottom:.2rem}
+.hint,footer,details {font-size:.93rem; color:#38555e}
+input {display:block; font:inherit; width:100%; margin:.5rem 0 1.35rem; color:inherit}
+input[type=text] {font-family:ui-monospace,monospace; border:1px solid #688589; border-radius:.3rem; padding:.7rem; font-size:1rem}
+input::file-selector-button {font:inherit; padding:.45rem .7rem; border:1px solid #688589; border-radius:.3rem; background:#f4f8f7; margin-right:.65rem}
+button {font:inherit; font-weight:700; color:white; background:#065b56; padding:.65rem 1.15rem; border:0; border-radius:.35rem; cursor:pointer}
+button:disabled {opacity:.65; cursor:wait}
+:focus-visible {outline:3px solid #005ea8; outline-offset:3px}
+#result {border-left:4px solid #34707c; padding:.7rem 1rem; margin:1.25rem 0 0; background:#eff6f6}
+#result[data-kind=match] {background:#e5f4ec; border-color:#197049}
+#result[data-kind=mismatch],#result[data-kind=error] {background:#fff0e8; border-color:#a34311}
+#result p {margin:.45rem 0}
+code {overflow-wrap:anywhere}
+summary {cursor:pointer; font-weight:650}
+footer {border-top:1px solid #b9cecb; margin-top:1.5rem; padding-top:.7rem}
+</style>
+</head>
+<body><main>
+<header><span class="brand">Arctic Console / Field tools</span><h1>Evidence Check</h1>
+<p>Does the file you received match the one in the case record? Compare its SHA-256 fingerprint before using it in an assessment.</p></header>
+<noscript><p>Enable JavaScript in this browser to calculate the fingerprint.</p></noscript>
+<form id="check">
+<label for="file">1. Choose the evidence file</label>
+<span class="hint" id="file-hint">Use the original download. Maximum size 64 MiB.</span>
+<input type="file" id="file" required aria-describedby="file-hint">
+<label for="expected">2. Paste the recorded SHA-256</label>
+<span class="hint" id="digest-hint">Copy the 64-character fingerprint from the trusted case record or source manifest.</span>
+<input type="text" id="expected" required aria-describedby="digest-hint" autocomplete="off" autocapitalize="none" spellcheck="false">
+<button id="compare" type="submit">Check file</button>
+<div aria-live="polite" aria-atomic="true"><section id="result" hidden>
+<h2 id="title"></h2><p id="detail"></p>
+<p id="actual-line" hidden>Calculated SHA-256<br><code id="actual"></code></p>
+</section></div>
+</form>
+<details><summary>What does a match tell me?</summary>
+<p>The fingerprint identifies the file’s bytes. A match lets you record that your copy agrees with the trusted reference. Check the source, date, coverage and interpretation separately.</p>
+</details>
+<footer>File contents stay in this browser. This tool works offline and clears the result when you change either input.</footer>
+</main>
+<script>
+"use strict";
+const form = document.getElementById("check");
+const fileInput = document.getElementById("file");
+const expected = document.getElementById("expected");
+const compare = document.getElementById("compare");
+const result = document.getElementById("result");
+let revision = 0;
+
+function clearResult() {
+  revision++;
+  result.hidden = true;
+  document.getElementById("actual").textContent = "";
+  compare.disabled = false;
+  compare.textContent = "Check file";
+}
+fileInput.addEventListener("change", clearResult);
+expected.addEventListener("input", clearResult);
+
+function show(kind, title, detail, digest = "") {
+  document.getElementById("title").textContent = title;
+  document.getElementById("detail").textContent = detail;
+  document.getElementById("actual-line").hidden = !digest;
+  document.getElementById("actual").textContent = digest;
+  result.dataset.kind = kind;
+  result.hidden = false;
+}
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  clearResult();
+  const request = revision;
+  const file = fileInput.files[0];
+  const reference = expected.value.trim().toLowerCase();
+  if (!file) return;
+  if (!/^[0-9a-f]{64}$/.test(reference)) {
+    show("error", "Check the recorded fingerprint", "Paste exactly 64 hexadecimal characters (0–9 and a–f).");
+    expected.focus();
+    return;
+  }
+  if (file.size > 64 * 1024 * 1024) {
+    show("error", "File exceeds 64 MiB", "Use a local SHA-256 utility for this file and compare the full fingerprint with the case record.");
+    return;
+  }
+  if (!globalThis.crypto?.subtle) {
+    show("error", "Secure hashing is unavailable", "Open this saved HTML file in a current browser, or use an HTTPS copy.");
+    return;
+  }
+  compare.disabled = true;
+  compare.textContent = "Checking…";
+  try {
+    const bytes = await file.arrayBuffer();
+    if (revision !== request) return;
+    const output = await crypto.subtle.digest("SHA-256", bytes);
+    if (revision !== request) return;
+    const digest = Array.from(new Uint8Array(output), byte => byte.toString(16).padStart(2, "0")).join("");
+    if (digest === reference) {
+      show("match", "Fingerprints match", file.name + " agrees with the recorded fingerprint. You can record this check in your assessment.", digest);
+    } else {
+      show("mismatch", "Fingerprints differ", "Check the case, file edition and recorded fingerprint. Obtain the intended file before relying on it.", digest);
+    }
+  } catch {
+    if (revision === request) show("error", "The file could not be read", "Choose the local file again and retry.");
+  } finally {
+    if (revision === request) {
+      compare.disabled = false;
+      compare.textContent = "Check file";
+    }
+  }
+});
+</script>
+</body></html>

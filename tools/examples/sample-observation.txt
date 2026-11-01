@@ -1,0 +1,3 @@
+Arctic Console training sample
+Synthetic record 042
+Sensor A reported 7 units at noon.
