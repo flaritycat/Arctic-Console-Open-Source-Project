@@ -1,0 +1,28 @@
+{
+  "reviewed_on": "2026-11-01",
+  "scope": "Development/testing only; none of these packages or downloaded browsers is included in the offline tools.",
+  "packages": [
+    {
+      "name": "playwright",
+      "version": "1.60.0",
+      "license": "Apache-2.0",
+      "source": "https://github.com/microsoft/playwright/tree/87bb9ddbd78f329df18c2b24847bc9409240cd07",
+      "license_url": "https://github.com/microsoft/playwright/blob/87bb9ddbd78f329df18c2b24847bc9409240cd07/LICENSE"
+    },
+    {
+      "name": "playwright-core",
+      "version": "1.60.0",
+      "license": "Apache-2.0",
+      "source": "https://github.com/microsoft/playwright/tree/87bb9ddbd78f329df18c2b24847bc9409240cd07",
+      "license_url": "https://github.com/microsoft/playwright/blob/87bb9ddbd78f329df18c2b24847bc9409240cd07/LICENSE"
+    },
+    {
+      "name": "fsevents",
+      "version": "2.3.2",
+      "license": "MIT",
+      "source": "https://github.com/fsevents/fsevents/tree/a7f5d00939b74e141a73131468c4ce48ee0f2197",
+      "license_url": "https://github.com/fsevents/fsevents/blob/a7f5d00939b74e141a73131468c4ce48ee0f2197/LICENSE",
+      "note": "Optional macOS dependency; not installed on the Windows/Linux verification hosts."
+    }
+  ]
+}

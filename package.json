@@ -1,0 +1,19 @@
+{
+  "name": "arctic-console-public",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "license": "Apache-2.0",
+  "scripts": {
+    "build": "node tools/build-practice.mjs && node tools/sync-legal-notices.mjs --write",
+    "test": "node --test tools/tests/*.test.mjs",
+    "test:browser": "node tools/tests/browser.mjs",
+    "check:generated": "node tools/build-practice.mjs --check && node tools/sync-legal-notices.mjs --check"
+  },
+  "devDependencies": {
+    "playwright": "1.60.0"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,638 @@
+<!doctype html>
+<!-- Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0 -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Practice an assessment · Arctic Console</title>
+<style>:root{color-scheme:light;font:100%/1.55 system-ui,-apple-system,sans-serif;color:#17353f;background:#eef3f2}
+*{box-sizing:border-box}body{margin:0}button,input,select,textarea{font:inherit}a{color:#075d69}button,a,input,textarea,select{touch-action:manipulation}
+button,.button{display:inline-block;border:1px solid #086458;border-radius:.4rem;background:#086458;color:#fff;font-weight:650;padding:.65rem 1rem;cursor:pointer;text-decoration:none;text-align:center}
+button.secondary,.button.secondary{background:#fff;color:#174e50;border-color:#8da9a8}button:disabled{opacity:.55;cursor:default}
+button.link{background:none;border:0;color:#075d69;text-decoration:underline;padding:.4rem 0}
+:focus-visible{outline:3px solid #005a9c;outline-offset:3px}
+.skip{position:absolute;top:-5rem;left:1rem;background:#fff;padding:.6rem;z-index:2}.skip:focus{top:1rem}
+.wrap{max-width:58rem;margin:auto;padding:0 1.25rem}
+.top{border-bottom:1px solid #bbceca;background:#fff}.top .wrap{display:flex;align-items:center;justify-content:space-between;gap:.8rem;padding-top:.9rem;padding-bottom:.9rem}
+.brand{font-size:.85rem;font-weight:750;letter-spacing:.09em;text-transform:uppercase}.tag{font-size:.78rem;background:#e5f1ee;color:#205c53;border:1px solid #aacbc1;border-radius:1rem;padding:.15rem .6rem;white-space:nowrap}
+main{padding-top:2rem!important;padding-bottom:2rem!important}h1{font-size:clamp(1.9rem,4.5vw,2.65rem);line-height:1.14;letter-spacing:-.035em;max-width:20ch;margin:.45rem 0 1rem}
+h2{font-size:1.25rem;line-height:1.3;margin:.2rem 0 .7rem}h3{font-size:1.04rem;margin:.2rem 0 .45rem}p{margin:.4rem 0 1rem}.muted{color:#42616a}.eyebrow{font-size:.78rem;font-weight:750;letter-spacing:.08em;text-transform:uppercase;color:#42616a}
+.lead{max-width:41rem;font-size:1.05rem}.card{background:#fff;border:1px solid #bfceca;border-radius:.6rem;padding:clamp(1rem,3vw,1.6rem);margin:1.1rem 0}
+.task{border-left:4px solid #087567}.actions{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
+.note{border-left:3px solid #729b94;padding:.55rem .9rem;background:#e5eeeb;font-size:.94rem}.error{border-left:4px solid #a44021;background:#fff0e8;padding:.65rem .9rem;color:#762d16;margin:.7rem 0}
+.success{border-left:4px solid #146b4e;background:#e1f1e9;padding:.65rem .9rem}
+nav.steps ol{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;padding:0;margin:0 0 1.8rem;gap:.45rem}
+.steps button{width:100%;text-align:left;padding:.55rem .65rem;font-size:.88rem;background:transparent;color:#385b61;border-color:#b3c9c4;border-radius:.35rem}
+.steps button[aria-current=step]{background:#173f48;color:white;border-color:#173f48}
+.steps span{display:block;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
+.panel[hidden],[hidden]{display:none!important}.panel h1:focus{outline:none}
+label{display:block;font-weight:650;margin:.95rem 0 .3rem}textarea,select,input[type=file]{width:100%;max-width:100%}
+textarea,select{background:#fff;color:#17353f;border:1px solid #718e92;border-radius:.3rem;padding:.65rem}
+textarea{min-height:7rem;resize:vertical}textarea[aria-invalid=true],select[aria-invalid=true]{border:2px solid #a44021}
+.hint{font-size:.88rem;color:#42616a;margin:.3rem 0}.field-error{font-size:.9rem;color:#8c3218;margin:.3rem 0}
+details{margin:.8rem 0}summary{cursor:pointer;font-weight:650;color:#174e50}details pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.91rem}
+table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{text-align:left;padding:.6rem .45rem;border-bottom:1px solid #cad9d4;font-size:.93rem}th{font-weight:650}
+.source-body{margin-top:.8rem}.source-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.two .card{margin:0}
+dl{margin:0}dt{font-size:.8rem;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:#42616a;margin:1rem 0 .3rem}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.import{margin-top:1.5rem;border-top:1px solid #cad9d4;padding-top:.8rem}.check{display:flex;align-items:flex-start;gap:.65rem;font-weight:500}.check input{width:1.2rem;height:1.2rem;flex:none;margin-top:.2rem}
+.status{min-height:1.5rem;margin:.6rem 0;font-size:.93rem}.footer{border-top:1px solid #bfd0cb;padding:1rem 0 2rem;font-size:.85rem;color:#42616a}.footer .wrap>p{margin:.3rem 0}
+#legal-notices pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
+.status:empty{min-height:0;margin:0}.success{margin:.8rem 0}
+@media(max-width:560px){.wrap{padding-left:1rem;padding-right:1rem}.two{grid-template-columns:1fr}main{padding-top:1.3rem!important}.steps button{font-size:.8rem;padding:.45rem}.top .wrap{align-items:flex-start}.brand{max-width:11rem;font-size:.75rem}.actions button{flex-grow:1}.card{padding:1rem}}
+@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+</style></head><body>
+<a class="skip" href="#main">Skip to the assignment</a>
+<header class="top"><div class="wrap"><div class="brand">Arctic Console <span class="tag">Practice</span></div><button class="link" id="open-reader">Review a handover</button></div></header>
+<main class="wrap" id="main">
+<nav class="steps" aria-label="Practice progress"><ol>
+<li><button data-step="0" aria-current="step"><span>01</span>Alert</button></li>
+<li><button data-step="1"><span>02</span>Evidence</button></li>
+<li><button data-step="2"><span>03</span>Assessment</button></li>
+<li><button data-step="3"><span>04</span>Handover</button></li>
+</ol></nav>
+<p id="message" class="status" role="status"></p><div id="error" class="error" role="alert" tabindex="-1" hidden></div>
+<section class="panel" data-screen="0" aria-labelledby="heading-0">
+<div class="eyebrow">Fictional case · Northern Bay</div><h1 id="heading-0" tabindex="-1">Your first Arctic assessment.</h1>
+<p class="lead">A report shows a rise in ice concentration at surveyed points. Can you tell the next analyst what that means for the whole bay?</p>
+<div class="card task"><div class="eyebrow">An alert to investigate</div><h2>A rise from 40% to 60%</h2><p>The sample average changed between two days. Check where the readings came from before making a wider claim.</p>
+<p class="muted">You will review two short sources, write your assessment and prepare a handover that another person can open.</p>
+<button id="start">Open the alert</button></div>
+<p class="note">All places and observations in this case are invented. This is a local training exercise, not a live Operations service.</p>
+<details class="import"><summary>Resume a draft</summary><p>Choose a draft you downloaded from this practice. Nothing is uploaded.</p><label for="draft-file">Practice draft (JSON, up to 64 KiB)</label><input id="draft-file" type="file" accept=".json,application/json"></details>
+</section>
+<section class="panel" data-screen="1" aria-labelledby="heading-1" hidden>
+<div class="eyebrow">Read before deciding</div><h1 id="heading-1" tabindex="-1">What do the sources support?</h1>
+<p class="lead">Open each source. When you have read it, mark it reviewed. Pay attention to <strong>which locations</strong> were measured.</p>
+<div class="card"><h2>Source 1 · The observations</h2><p>Two daily averages from five fictional readings.</p>
+<details id="source-observations"><summary>Read the observation table</summary><div class="source-body">
+<table><caption>Invented ice-concentration readings</caption><thead><tr><th scope="col">Date, 2026</th><th scope="col">Points and readings</th><th scope="col">Mean</th></tr></thead><tbody>
+<tr><th scope="row">30 October</th><td>A: 20% · B: 40% · C: 60%</td><td>40%</td></tr>
+<tr><th scope="row">31 October</th><td>D: 50% · E: 70%</td><td>60%</td></tr></tbody></table>
+<p>The mean rose by 20 percentage points. The point labels changed too.</p>
+<button class="secondary" data-review="observations">Mark observations reviewed</button></div></details><p id="review-observations" class="hint">Not reviewed yet</p></div>
+<div class="card"><h2>Source 2 · How the sample was collected</h2><p>The scope and limits of the comparison.</p>
+<details id="source-sampling"><summary>Read the sampling note</summary><div class="source-body">
+<p>None of the first day's locations was revisited. There are only five readings, no bay-wide coverage and no uncertainty estimate.</p>
+<p class="note">A change between these sample means does not establish a change at matched locations or across the whole bay.</p>
+<button class="secondary" data-review="sampling">Mark sampling note reviewed</button></div></details><p id="review-sampling" class="hint">Not reviewed yet</p></div>
+<p id="review-progress" class="hint">0 of 2 sources reviewed</p><div class="actions"><button id="to-assessment">Write an assessment</button></div>
+</section>
+<section class="panel" data-screen="2" aria-labelledby="heading-2" hidden>
+<div class="eyebrow">Your judgment</div><h1 id="heading-2" tabindex="-1">Leave a useful assessment.</h1><p class="lead">Say what is supported, what is uncertain and what the next analyst should check.</p>
+<form id="assessment-form" class="card" novalidate>
+<label for="decision">What should happen next?</label><select id="decision" aria-describedby="decision-error"><option value="">Choose an action</option><option value="investigate">Check further</option><option value="monitor">Keep under review</option><option value="escalate">Ask for specialist review</option></select><p id="decision-error" class="field-error" hidden></p>
+<label for="finding">What can you say from this evidence?</label><p id="finding-hint" class="hint">Describe the observation and the area or sample it represents. Maximum 1,200 characters.</p><textarea id="finding" maxlength="1200" aria-describedby="finding-hint finding-error"></textarea><p id="finding-error" class="field-error" hidden></p>
+<label for="limitation">What is still uncertain?</label><p id="limitation-hint" class="hint">Explain one limit that changes how the finding can be used. Maximum 800 characters.</p><textarea id="limitation" maxlength="800" aria-describedby="limitation-hint limitation-error"></textarea><p id="limitation-error" class="field-error" hidden></p>
+<label for="next_check">What should the next analyst check?</label><p id="next_check-hint" class="hint">Give a concrete next step. Maximum 800 characters.</p><textarea id="next_check" maxlength="800" aria-describedby="next_check-hint next_check-error"></textarea><p id="next_check-error" class="field-error" hidden></p>
+<div class="actions"><button type="submit">Review the handover</button><button class="secondary" type="button" data-go="1">Revisit the evidence</button></div>
+</form><p class="note">Your draft is only in this open page. Download a draft if you want to close it and resume later.</p>
+</section>
+<section class="panel" data-screen="3" aria-labelledby="heading-3" hidden>
+<div class="eyebrow">Prepare, then share yourself</div><h1 id="heading-3" tabindex="-1">Check what you are handing over.</h1><p class="lead">Read your assessment once more. The file will include this case's evidence references and your exact words.</p>
+<div class="card"><h2>Northern Bay · Training handover</h2><dl id="author-summary"></dl></div>
+<p class="note">Downloading a file does not send it, notify anyone or transfer responsibility. Give the file to your reader through a channel you choose.</p>
+<div class="actions"><button id="download-handover">Download handover</button><button class="secondary" data-go="2">Edit assessment</button></div>
+<div id="handover-ready" class="success" hidden><h2>Handover file prepared</h2><p>No one has received or accepted it through this tool. Keep the downloaded file, then ask your reader to open this practice and select <strong>Review a handover</strong>.</p><a class="button secondary" href="?reader=1" target="_blank" rel="noopener">Try the reader role in a new tab</a></div>
+</section>
+<section class="panel" data-screen="reader" aria-labelledby="heading-reader" hidden>
+<div class="eyebrow">The receiving analyst</div><h1 id="heading-reader" tabindex="-1">Review someone else's handover.</h1><p class="lead">Open a practice handover file. Read the assessment against its sources and decide what you would check next.</p>
+<div class="card"><label for="handover-file">Practice handover (JSON, up to 64 KiB)</label><input id="handover-file" type="file" accept=".json,application/json"><p class="hint">The file stays on your device. Draft files belong under Resume a draft.</p></div>
+<div id="reader-result" hidden><p class="success">The record checksum and case references match this practice edition. This does not authenticate its author or prove the assessment is correct.</p>
+<div class="card"><h2>The saved assessment</h2><p id="reader-created" class="hint"></p><dl id="reader-summary"></dl></div>
+<div class="card"><h2>Check the sources yourself</h2><details><summary>Fictional observation table</summary><p id="reader-observations" class="source-text"></p></details><details><summary>Sampling note</summary><p id="reader-sampling" class="source-text"></p></details>
+<details><summary>What does the file check establish?</summary><p>A checksum detects a change that does not have a matching recalculated checksum. Anyone editing the JSON can also recalculate it. It is not a signature. Source references must match the built-in fictional case; interpretation still needs your review.</p><p id="reader-fingerprint" class="source-text hint"></p></details></div>
+<label class="check"><input id="reader-reviewed" type="checkbox">I have read the assessment and checked what its sources support.</label><div class="actions"><button id="finish-reader">Finish reader practice</button></div>
+<div id="reader-finished" class="success" hidden><h2>Reader practice complete on this device</h2><p>This does not notify the sender or record a real acknowledgement. In a live service, responsibility would need an authenticated, confirmed transition.</p>
+<details><summary>Reflect on the judgment</summary><p>The sample means differ, but the locations were not revisited. This case cannot establish a change across the whole bay. A file match also cannot establish that the author's interpretation is correct.</p></details></div></div>
+<div class="actions"><button class="secondary" id="return-author">Return to my practice</button></div>
+</section>
+<div class="actions" id="draft-actions"><button class="secondary" id="download-draft">Download draft</button><button class="link" id="reset">Start over</button></div>
+</main>
+<footer class="footer"><div class="wrap"><p>Arctic Console practice 0.2.0 · Fictional training only · No automatic saving or sending.</p><p><a href="evidence-check.html">Check an evidence file</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/PRIVACY.md">Data handling</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/docs/practice-guide.md">Practice guide</a></p>
+<!-- BEGIN EMBEDDED LEGAL NOTICES -->
+<details id="legal-notices">
+<summary>License and AI notice (available offline)</summary>
+<p>These texts travel with this file. The AI notice explains the license; it adds no license conditions.</p>
+<details><summary>Apache License 2.0 — complete text</summary>
+<pre id="license-text">
+                                 Apache License
+                           Version 2.0, January 2004
+                        http://www.apache.org/licenses/
+
+   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+
+   1. Definitions.
+
+      "License" shall mean the terms and conditions for use, reproduction,
+      and distribution as defined by Sections 1 through 9 of this document.
+
+      "Licensor" shall mean the copyright owner or entity authorized by
+      the copyright owner that is granting the License.
+
+      "Legal Entity" shall mean the union of the acting entity and all
+      other entities that control, are controlled by, or are under common
+      control with that entity. For the purposes of this definition,
+      "control" means (i) the power, direct or indirect, to cause the
+      direction or management of such entity, whether by contract or
+      otherwise, or (ii) ownership of fifty percent (50%) or more of the
+      outstanding shares, or (iii) beneficial ownership of such entity.
+
+      "You" (or "Your") shall mean an individual or Legal Entity
+      exercising permissions granted by this License.
+
+      "Source" form shall mean the preferred form for making modifications,
+      including but not limited to software source code, documentation
+      source, and configuration files.
+
+      "Object" form shall mean any form resulting from mechanical
+      transformation or translation of a Source form, including but
+      not limited to compiled object code, generated documentation,
+      and conversions to other media types.
+
+      "Work" shall mean the work of authorship, whether in Source or
+      Object form, made available under the License, as indicated by a
+      copyright notice that is included in or attached to the work
+      (an example is provided in the Appendix below).
+
+      "Derivative Works" shall mean any work, whether in Source or Object
+      form, that is based on (or derived from) the Work and for which the
+      editorial revisions, annotations, elaborations, or other modifications
+      represent, as a whole, an original work of authorship. For the purposes
+      of this License, Derivative Works shall not include works that remain
+      separable from, or merely link (or bind by name) to the interfaces of,
+      the Work and Derivative Works thereof.
+
+      "Contribution" shall mean any work of authorship, including
+      the original version of the Work and any modifications or additions
+      to that Work or Derivative Works thereof, that is intentionally
+      submitted to Licensor for inclusion in the Work by the copyright owner
+      or by an individual or Legal Entity authorized to submit on behalf of
+      the copyright owner. For the purposes of this definition, "submitted"
+      means any form of electronic, verbal, or written communication sent
+      to the Licensor or its representatives, including but not limited to
+      communication on electronic mailing lists, source code control systems,
+      and issue tracking systems that are managed by, or on behalf of, the
+      Licensor for the purpose of discussing and improving the Work, but
+      excluding communication that is conspicuously marked or otherwise
+      designated in writing by the copyright owner as "Not a Contribution."
+
+      "Contributor" shall mean Licensor and any individual or Legal Entity
+      on behalf of whom a Contribution has been received by Licensor and
+      subsequently incorporated within the Work.
+
+   2. Grant of Copyright License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      copyright license to reproduce, prepare Derivative Works of,
+      publicly display, publicly perform, sublicense, and distribute the
+      Work and such Derivative Works in Source or Object form.
+
+   3. Grant of Patent License. Subject to the terms and conditions of
+      this License, each Contributor hereby grants to You a perpetual,
+      worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+      (except as stated in this section) patent license to make, have made,
+      use, offer to sell, sell, import, and otherwise transfer the Work,
+      where such license applies only to those patent claims licensable
+      by such Contributor that are necessarily infringed by their
+      Contribution(s) alone or by combination of their Contribution(s)
+      with the Work to which such Contribution(s) was submitted. If You
+      institute patent litigation against any entity (including a
+      cross-claim or counterclaim in a lawsuit) alleging that the Work
+      or a Contribution incorporated within the Work constitutes direct
+      or contributory patent infringement, then any patent licenses
+      granted to You under this License for that Work shall terminate
+      as of the date such litigation is filed.
+
+   4. Redistribution. You may reproduce and distribute copies of the
+      Work or Derivative Works thereof in any medium, with or without
+      modifications, and in Source or Object form, provided that You
+      meet the following conditions:
+
+      (a) You must give any other recipients of the Work or
+          Derivative Works a copy of this License; and
+
+      (b) You must cause any modified files to carry prominent notices
+          stating that You changed the files; and
+
+      (c) You must retain, in the Source form of any Derivative Works
+          that You distribute, all copyright, patent, trademark, and
+          attribution notices from the Source form of the Work,
+          excluding those notices that do not pertain to any part of
+          the Derivative Works; and
+
+      (d) If the Work includes a "NOTICE" text file as part of its
+          distribution, then any Derivative Works that You distribute must
+          include a readable copy of the attribution notices contained
+          within such NOTICE file, excluding those notices that do not
+          pertain to any part of the Derivative Works, in at least one
+          of the following places: within a NOTICE text file distributed
+          as part of the Derivative Works; within the Source form or
+          documentation, if provided along with the Derivative Works; or,
+          within a display generated by the Derivative Works, if and
+          wherever such third-party notices normally appear. The contents
+          of the NOTICE file are for informational purposes only and
+          do not modify the License. You may add Your own attribution
+          notices within Derivative Works that You distribute, alongside
+          or as an addendum to the NOTICE text from the Work, provided
+          that such additional attribution notices cannot be construed
+          as modifying the License.
+
+      You may add Your own copyright statement to Your modifications and
+      may provide additional or different license terms and conditions
+      for use, reproduction, or distribution of Your modifications, or
+      for any such Derivative Works as a whole, provided Your use,
+      reproduction, and distribution of the Work otherwise complies with
+      the conditions stated in this License.
+
+   5. Submission of Contributions. Unless You explicitly state otherwise,
+      any Contribution intentionally submitted for inclusion in the Work
+      by You to the Licensor shall be under the terms and conditions of
+      this License, without any additional terms or conditions.
+      Notwithstanding the above, nothing herein shall supersede or modify
+      the terms of any separate license agreement you may have executed
+      with Licensor regarding such Contributions.
+
+   6. Trademarks. This License does not grant permission to use the trade
+      names, trademarks, service marks, or product names of the Licensor,
+      except as required for reasonable and customary use in describing the
+      origin of the Work and reproducing the content of the NOTICE file.
+
+   7. Disclaimer of Warranty. Unless required by applicable law or
+      agreed to in writing, Licensor provides the Work (and each
+      Contributor provides its Contributions) on an "AS IS" BASIS,
+      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+      implied, including, without limitation, any warranties or conditions
+      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+      PARTICULAR PURPOSE. You are solely responsible for determining the
+      appropriateness of using or redistributing the Work and assume any
+      risks associated with Your exercise of permissions under this License.
+
+   8. Limitation of Liability. In no event and under no legal theory,
+      whether in tort (including negligence), contract, or otherwise,
+      unless required by applicable law (such as deliberate and grossly
+      negligent acts) or agreed to in writing, shall any Contributor be
+      liable to You for damages, including any direct, indirect, special,
+      incidental, or consequential damages of any character arising as a
+      result of this License or out of the use or inability to use the
+      Work (including but not limited to damages for loss of goodwill,
+      work stoppage, computer failure or malfunction, or any and all
+      other commercial damages or losses), even if such Contributor
+      has been advised of the possibility of such damages.
+
+   9. Accepting Warranty or Additional Liability. While redistributing
+      the Work or Derivative Works thereof, You may choose to offer,
+      and charge a fee for, acceptance of support, warranty, indemnity,
+      or other liability obligations and/or rights consistent with this
+      License. However, in accepting such obligations, You may act only
+      on Your own behalf and on Your sole responsibility, not on behalf
+      of any other Contributor, and only if You agree to indemnify,
+      defend, and hold each Contributor harmless for any liability
+      incurred by, or claims asserted against, such Contributor by reason
+      of your accepting any such warranty or additional liability.
+
+   END OF TERMS AND CONDITIONS
+
+   APPENDIX: How to apply the Apache License to your work.
+
+      To apply the Apache License to your work, attach the following
+      boilerplate notice, with the fields enclosed by brackets "[]"
+      replaced with your own identifying information. (Don't include
+      the brackets!)  The text should be enclosed in the appropriate
+      comment syntax for the file format. We also recommend that a
+      file or class name and description of purpose be included on the
+      same "printed page" as the copyright notice for easier
+      identification within third-party archives.
+
+   Copyright [yyyy] [name of copyright owner]
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+</pre>
+</details>
+<details><summary>AI development, warranty and liability notice</summary>
+<pre id="ai-notice-text"># AI development, warranty and liability notice
+
+Revised 1 November 2026. This is an informational notice for the public Arctic Console field tools, including Evidence Check and the fictional practice case. It is not a separate license, an additional contract, a release of claims or a requirement to waive rights. It does not change the terms of an earlier release.
+
+## Development and provenance
+
+The project-developed field-tool code was produced with substantial generative-AI assistance under human direction. AI also assisted with tests, documentation and review. This describes the recorded development process; it is not a claim that every repository file was generated by AI. Third-party works and later contributions may have different origins. See [AUTHORS.md](AUTHORS.md) and [THIRD_PARTY.md](THIRD_PARTY.md).
+
+AI-assisted material may contain mistakes, security defects, omissions or similarities to existing works. A similarity must be assessed on the facts; calling it coincidental, or identifying AI involvement, does not establish permission or rule out infringement. Testing does not establish ownership or guarantee that every defect or attribution omission has been found.
+
+## Applicable license and warranty provisions
+
+For material offered under Apache-2.0, the warranty disclaimer and liability limitations are those in sections 7 and 8 of the [unchanged Apache License, Version 2.0](LICENSE). They include qualifications for applicable law and written agreements. Section 9 addresses separately accepted warranty and liability obligations. This notice neither enlarges those exclusions nor adds restrictions to the license.
+
+The [licensing scope](LICENSING.md) distinguishes project material, third-party works and material excluded from the public release. A license label or AI disclosure does not create copyright where none exists, establish ownership of another party's work or grant rights beyond those the relevant licensor is authorized to grant.
+
+## Rights and obligations remain applicable
+
+This notice does not bind third-party rights holders, excuse infringement, remove attribution or source-delivery obligations, or exclude liability that applicable law does not permit to be excluded. Mandatory consumer and other statutory rights, applicable third-party terms and separate written commitments remain unaffected. It provides no indemnity or assurance of immunity from claims. Applicable law and the relevant license or agreement control over this explanatory notice.
+
+Use the software with appropriate independent checks. A matching SHA-256 is a comparison with a supplied fingerprint; it does not establish the evidence's truth, lawful acquisition, ownership or scientific validity. This explains the tool's function and does not create an additional restriction on permitted uses.
+
+## Report a rights or attribution concern
+
+To help investigate a suspected missing credit, license conflict or unauthorized inclusion, use the [issue tracker](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/issues) with the affected file and version, source reference and basis of the concern. Supply the information available to you; this is not a requirement to prove a claim before it can be considered. Do not post confidential material or personal evidence. Request a private contact channel if needed. Security vulnerabilities have a [separate reporting route](SECURITY.md).
+
+Reports help maintainers investigate and, where warranted, correct notices, replace material or remove it. This voluntary route does not require a waiver, impose a deadline on claimants, replace legally available notice procedures or require anyone to wait before exercising a right. See [REFERENCES.md](REFERENCES.md) for unresolved permissions.
+</pre>
+</details></details>
+<!-- END EMBEDDED LEGAL NOTICES -->
+</div></footer>
+<script>"use strict";
+(() => {
+// Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0
+const VERSION = "0.2.0";
+const MAX_FILE_BYTES = 64 * 1024;
+const CASE = {
+  id: "northern-bay-001", revision: 1, title: "Did the ice increase across the bay?",
+  evidence: [
+    { id: "observations", title: "Fictional observation table",
+      text: "FICTIONAL TRAINING DATA — Northern Bay\n30 October 2026: point A 20%, point B 40%, point C 60%. Mean: 40%.\n31 October 2026: point D 50%, point E 70%. Mean: 60%.\nThese are different locations on the two days. No real Arctic observations are represented." },
+    { id: "sampling", title: "Sampling note",
+      text: "FICTIONAL TRAINING NOTE — Northern Bay\nNone of the first day's locations was revisited. There are only five readings, no bay-wide coverage and no uncertainty estimate. A change between these sample means does not establish a change at matched locations or across the whole bay." },
+  ],
+};
+const DECISIONS = {
+  investigate: "Check further",
+  monitor: "Keep under review",
+  escalate: "Ask for specialist review",
+};
+const blankState = () => ({ reviewed: [], assessment: { decision: "", finding: "", limitation: "", next_check: "" } });
+function assessmentErrors(state) {
+  const errors = {};
+  if (state.reviewed.length !== 2) errors.evidence = "Open and review both sources before preparing a handover.";
+  if (!Object.hasOwn(DECISIONS, state.assessment.decision)) errors.decision = "Choose what should happen next.";
+  for (const [key, label] of [["finding", "Write what the evidence supports."], ["limitation", "Explain what is still uncertain."], ["next_check", "Give the next analyst a specific check."]]) {
+    if (!state.assessment[key].trim()) errors[key] = label;
+  }
+  return errors;
+}
+function canonical(value) {
+  if (Array.isArray(value)) return "[" + value.map(canonical).join(",") + "]";
+  if (value && typeof value === "object") return "{" + Object.keys(value).sort().map(k => JSON.stringify(k) + ":" + canonical(value[k])).join(",") + "}";
+  return JSON.stringify(value);
+}
+async function sha256(text) {
+  if (!globalThis.crypto?.subtle) throw new Error("Secure hashing is unavailable. Use the hosted HTTPS page or a current browser with the downloaded file.");
+  const bytes = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(text));
+  return Array.from(new Uint8Array(bytes), v => v.toString(16).padStart(2, "0")).join("");
+}
+function keys(value, expected) {
+  if (!value || typeof value !== "object" || Array.isArray(value) ||
+      Object.keys(value).length !== expected.length || expected.some(key => !Object.hasOwn(value, key))) throw new Error("The file has an unsupported structure.");
+}
+function validateState(state, complete = false) {
+  keys(state, ["reviewed", "assessment"]);
+  keys(state.assessment, ["decision", "finding", "limitation", "next_check"]);
+  if (!Array.isArray(state.reviewed) || state.reviewed.length > 2 || new Set(state.reviewed).size !== state.reviewed.length ||
+      state.reviewed.some(id => !CASE.evidence.some(e => e.id === id))) throw new Error("The evidence review list is invalid.");
+  for (const [key, limit] of [["decision", 30], ["finding", 1200], ["limitation", 800], ["next_check", 800]]) {
+    if (typeof state.assessment[key] !== "string" || state.assessment[key].length > limit) throw new Error("An assessment field is invalid or too long.");
+  }
+  if (state.assessment.decision !== "" && !Object.hasOwn(DECISIONS, state.assessment.decision)) throw new Error("The assessment decision is unsupported.");
+  if (complete && Object.keys(assessmentErrors(state)).length) throw new Error("This handover is incomplete. Review both sources and complete the assessment.");
+}
+async function references() {
+  return Promise.all(CASE.evidence.map(async e => ({ id: e.id, sha256: await sha256(e.text) })));
+}
+async function makeRecord(kind, state, now = new Date()) {
+  if (!["draft", "handover"].includes(kind)) throw new Error("Unsupported record kind.");
+  validateState(state, kind === "handover");
+  const snapshot = JSON.parse(JSON.stringify(state));
+  const payload = {
+    schema_version: 1, kind, training: true, tool_version: VERSION,
+    case_id: CASE.id, case_revision: CASE.revision, created_at: now.toISOString(),
+    evidence: await references(), state: snapshot,
+  };
+  return { payload, sha256: await sha256(canonical(payload)) };
+}
+async function parseRecord(text, expectedKind) {
+  if (typeof text !== "string" || new TextEncoder().encode(text).length > MAX_FILE_BYTES) throw new Error("Choose a practice JSON file no larger than 64 KiB.");
+  let record;
+  try { record = JSON.parse(text); } catch { throw new Error("This is not a readable JSON file. Choose a draft or handover downloaded from this practice."); }
+  keys(record, ["payload", "sha256"]);
+  const p = record.payload;
+  keys(p, ["schema_version", "kind", "training", "tool_version", "case_id", "case_revision", "created_at", "evidence", "state"]);
+  if (p.schema_version !== 1 || p.training !== true || p.tool_version !== VERSION || p.case_id !== CASE.id || p.case_revision !== CASE.revision)
+    throw new Error("This file belongs to an unsupported practice edition. Use the matching version of the tool.");
+  if (!["draft", "handover"].includes(p.kind)) throw new Error("Unsupported record kind.");
+  if (p.kind !== expectedKind) throw new Error(p.kind === "draft" ? "This is a draft. Use Resume a draft to continue writing it." : "This is a handover. Use Review a handover to read it.");
+  if (typeof p.created_at !== "string" || p.created_at.length > 30 || !Number.isFinite(Date.parse(p.created_at)) || new Date(p.created_at).toISOString() !== p.created_at)
+    throw new Error("The record's creation time is invalid.");
+  validateState(p.state, p.kind === "handover");
+  if (!Array.isArray(p.evidence) || p.evidence.length !== 2) throw new Error("The evidence references are invalid.");
+  for (const item of p.evidence) {
+    keys(item, ["id", "sha256"]);
+    if (typeof item.id !== "string" || typeof item.sha256 !== "string") throw new Error("The evidence references are invalid.");
+  }
+  const refs = await references();
+  if (canonical(p.evidence) !== canonical(refs)) throw new Error("The evidence references do not match this practice edition.");
+  if (typeof record.sha256 !== "string" || !/^[a-f0-9]{64}$/.test(record.sha256) || await sha256(canonical(p)) !== record.sha256)
+    throw new Error("The record's checksum does not match. Obtain the intended file; the current work has not been replaced.");
+  return record;
+}
+
+// Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0
+const byId = id => document.getElementById(id);
+let state = blankState();
+let screen = 0;
+let lastAuthorScreen = 0;
+let revision = 0;
+let importToken = 0;
+let exporting = false;
+let readerRecord = null;
+const fields = ["decision", "finding", "limitation", "next_check"];
+
+function message(text = "") { byId("message").textContent = text; }
+function error(text = "") {
+  byId("error").textContent = text;
+  byId("error").hidden = !text;
+  if (text) byId("error").focus();
+}
+function hasWork() { return state.reviewed.length > 0 || fields.some(key => state.assessment[key]); }
+function invalidate() {
+  revision++;
+  byId("handover-ready").hidden = true;
+  message();
+}
+function drawProgress() {
+  byId("draft-actions").hidden = screen === "reader" || (screen === 0 && !hasWork());
+  for (const e of CASE.evidence) {
+    const checked = state.reviewed.includes(e.id);
+    byId("review-" + e.id).textContent = checked ? "Reviewed — you can reopen this source" : "Not reviewed yet";
+    document.querySelector('[data-review="' + e.id + '"]').textContent = checked ? "Reviewed" : e.id === "observations" ? "Mark observations reviewed" : "Mark sampling note reviewed";
+  }
+  byId("review-progress").textContent = state.reviewed.length + " of 2 sources reviewed";
+  document.querySelectorAll("[data-step]").forEach(button => {
+    const step = Number(button.dataset.step);
+    button.disabled = (step === 2 && state.reviewed.length !== 2) || (step === 3 && Object.keys(assessmentErrors(state)).length > 0);
+    if (step === screen) button.setAttribute("aria-current", "step");
+    else button.removeAttribute("aria-current");
+  });
+}
+function fillSummary(id, assessment) {
+  const list = byId(id);
+  list.replaceChildren();
+  for (const [key, label] of [["decision", "Next action"], ["finding", "Finding"], ["limitation", "Limitation"], ["next_check", "Next check"]]) {
+    const title = document.createElement("dt");
+    title.textContent = label;
+    const value = document.createElement("dd");
+    value.textContent = key === "decision" ? DECISIONS[assessment.decision] : assessment[key];
+    list.append(title, value);
+  }
+}
+function show(next, focus = true) {
+  if (next === 2 && state.reviewed.length !== 2) { error("Read and mark both sources reviewed before writing the assessment."); return; }
+  if (next === 3 && Object.keys(assessmentErrors(state)).length) { showErrors(); return; }
+  if (screen !== next) importToken++;
+  if (screen !== "reader") lastAuthorScreen = screen;
+  screen = next;
+  message(); error();
+  document.querySelectorAll("[data-screen]").forEach(panel => { panel.hidden = panel.dataset.screen !== String(next); });
+  document.querySelector(".steps").hidden = next === "reader";
+  byId("draft-actions").hidden = next === "reader";
+  byId("open-reader").hidden = next === "reader";
+  if (next === 3) fillSummary("author-summary", state.assessment);
+  drawProgress();
+  if (focus) byId("heading-" + next).focus();
+}
+function clearFieldErrors() {
+  for (const key of fields) {
+    byId(key).removeAttribute("aria-invalid");
+    byId(key + "-error").hidden = true;
+    byId(key + "-error").textContent = "";
+  }
+}
+function showErrors() {
+  clearFieldErrors();
+  const problems = assessmentErrors(state);
+  for (const key of fields) if (problems[key]) {
+    byId(key).setAttribute("aria-invalid", "true");
+    byId(key + "-error").textContent = problems[key];
+    byId(key + "-error").hidden = false;
+  }
+  if (problems.evidence) { error(problems.evidence); return; }
+  if (Object.keys(problems).length) {
+    error("Your draft is still here. Complete the marked fields before preparing a handover.");
+    byId(fields.find(key => problems[key])).focus();
+  }
+}
+function download(record, name) {
+  const url = URL.createObjectURL(new Blob([JSON.stringify(record, null, 2) + "\n"], { type: "application/json" }));
+  const link = document.createElement("a");
+  link.href = url; link.download = name;
+  document.body.append(link); link.click(); link.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+}
+async function exportRecord(kind) {
+  if (exporting) return;
+  exporting = true;
+  const startRevision = revision;
+  const button = byId("download-" + kind);
+  button.disabled = true;
+  error();
+  try {
+    const record = await makeRecord(kind, state);
+    if (startRevision !== revision) { error("Your assessment changed while the file was being prepared. Download the current version again."); return; }
+    download(record, "arctic-practice-" + kind + ".json");
+    if (kind === "handover") byId("handover-ready").hidden = false;
+    message(kind === "draft" ? "Draft download prepared. Keep the file to resume; this page does not save it automatically." : "Handover download prepared. It has not been sent or accepted.");
+  } catch (e) { error(e.message); }
+  finally { exporting = false; button.disabled = false; }
+}
+async function importRecord(input, kind) {
+  const file = input.files[0];
+  if (!file) return;
+  input.value = ""; // The captured File remains readable; the same file can be selected again.
+  const token = ++importToken;
+  const originalRevision = revision;
+  error(); message("Checking the selected file…");
+  try {
+    if (file.size > MAX_FILE_BYTES) throw new Error("Choose a practice JSON file no larger than 64 KiB.");
+    const record = await parseRecord(await file.text(), kind);
+    if (token !== importToken) return;
+    if (kind === "draft") {
+      if (originalRevision !== revision) throw new Error("Your draft changed while the file was loading. Choose the file again if you still want to replace it.");
+      if (hasWork() && !window.confirm("Replace the draft in this page? Download it first if you want to keep it.")) { message("Import cancelled. Your current draft is unchanged."); return; }
+      state = record.payload.state;
+      for (const key of fields) byId(key).value = state.assessment[key];
+      clearFieldErrors();
+      invalidate();
+      show(state.reviewed.length === 2 ? 2 : 1);
+      message("Draft restored. Review it before preparing a handover.");
+    } else {
+      readerRecord = record;
+      fillSummary("reader-summary", record.payload.state.assessment);
+      byId("reader-created").textContent = "Opened: " + file.name + " · Recorded time: " + record.payload.created_at + " (from the author's device; not a trusted timestamp)";
+      byId("reader-fingerprint").textContent = "Record SHA-256: " + record.sha256;
+      for (const e of CASE.evidence) byId("reader-" + e.id).textContent = e.text;
+      byId("reader-result").hidden = false;
+      byId("reader-reviewed").checked = false;
+      byId("reader-finished").hidden = true;
+      message("Handover opened. Read the saved assessment and check its sources.");
+      byId("reader-result").scrollIntoView({ block: "start" });
+    }
+  } catch (e) {
+    if (token === importToken) {
+      message();
+      error(e.message + (kind === "handover" && readerRecord ? " The previously opened handover is still displayed below." : ""));
+    }
+  }
+}
+for (const key of fields) byId(key).addEventListener("input", () => {
+  state.assessment[key] = byId(key).value;
+  invalidate(); clearFieldErrors(); error(); drawProgress();
+});
+document.querySelectorAll("[data-review]").forEach(button => button.addEventListener("click", () => {
+  const id = button.dataset.review;
+  if (!byId("source-" + id).open) return;
+  if (!state.reviewed.includes(id)) state.reviewed.push(id);
+  invalidate(); drawProgress();
+  message(state.reviewed.length === 2 ? "Both sources reviewed. You can write your assessment." : "Source marked reviewed. Read the other source next.");
+}));
+document.querySelectorAll("[data-step]").forEach(button => button.addEventListener("click", () => show(Number(button.dataset.step))));
+document.querySelectorAll("[data-go]").forEach(button => button.addEventListener("click", () => show(Number(button.dataset.go))));
+byId("start").addEventListener("click", () => show(1));
+byId("to-assessment").addEventListener("click", () => show(2));
+byId("assessment-form").addEventListener("submit", event => {
+  event.preventDefault();
+  if (Object.keys(assessmentErrors(state)).length) showErrors();
+  else { clearFieldErrors(); show(3); }
+});
+byId("download-draft").addEventListener("click", () => exportRecord("draft"));
+byId("download-handover").addEventListener("click", () => exportRecord("handover"));
+byId("draft-file").addEventListener("change", () => importRecord(byId("draft-file"), "draft"));
+byId("handover-file").addEventListener("change", () => importRecord(byId("handover-file"), "handover"));
+byId("open-reader").addEventListener("click", () => show("reader"));
+byId("return-author").addEventListener("click", () => show(lastAuthorScreen));
+byId("reset").addEventListener("click", () => {
+  if (hasWork() && !window.confirm("Start over? Your current draft will be removed from this page. Download it first if you want to keep it.")) return;
+  importToken++;
+  state = blankState();
+  for (const key of fields) byId(key).value = "";
+  for (const e of CASE.evidence) byId("source-" + e.id).open = false;
+  clearFieldErrors(); invalidate(); show(0);
+});
+byId("finish-reader").addEventListener("click", () => {
+  if (!readerRecord || !byId("reader-reviewed").checked) { error("Read the assessment and sources, then tick the review confirmation."); return; }
+  error(); byId("reader-finished").hidden = false;
+  message("Reader practice complete locally. No acknowledgement has been sent.");
+});
+byId("reader-reviewed").addEventListener("change", () => { byId("reader-finished").hidden = true; error(); });
+window.addEventListener("beforeunload", event => {
+  if (hasWork()) { event.preventDefault(); event.returnValue = ""; }
+});
+show(new URLSearchParams(location.search).get("reader") === "1" ? "reader" : 0, false);
+
+})();</script></body></html>

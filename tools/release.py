@@ -12,7 +12,7 @@ import zipfile
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED = {"LICENSE", "DISCLAIMER.md", "LICENSING.md", "PRIVACY.md", "AUTHORS.md",
             "THIRD_PARTY.md", "REFERENCES.md", "SECURITY.md", "README.md", "release.json",
-            "evidence-check.html"}
+            "evidence-check.html", "practice.html"}
 
 def git(root, *args):
     return subprocess.check_output(["git", "-C", str(root), *args], stderr=subprocess.PIPE)
@@ -39,7 +39,7 @@ def snapshot(root):
     for source, target in config["files"].items():
         safe_path(source)
         safe_path(target)
-        if target.casefold() in {p.casefold() for p in files} or target == "BUILD.json":
+        if target.casefold() in {p.casefold() for p in files} or target.casefold() == "build.json":
             raise ValueError("Duplicate/reserved package path")
         entry = git(root, "ls-tree", "HEAD", "--", source).decode()
         if not entry.startswith("100644 blob ") and not entry.startswith("100755 blob "):
@@ -80,10 +80,20 @@ def verify_bytes(data, expected):
             raise ValueError("Archive file list differs from the committed release manifest")
         for name in names:
             safe_path(name)
+            info = archive.getinfo(name)
+            if info.compress_type != zipfile.ZIP_STORED or info.file_size != len(expected[name]):
+                raise ValueError("Archive bytes differ from committed source: " + name)
             if archive.read(name) != expected[name]:
                 raise ValueError("Archive bytes differ from committed source: " + name)
     if data != archive_bytes(expected):
         raise ValueError("Archive is not the deterministic package for this commit")
+
+def write_output(output, name, data):
+    target = output / safe_path(name)
+    if not target.resolve().is_relative_to(output):
+        raise ValueError("Output link escapes the distribution directory")
+    target.parent.mkdir(parents=True, exist_ok=True)
+    target.write_bytes(data)
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -93,11 +103,14 @@ def main():
     args = parser.parse_args()
     config, files = snapshot(ROOT)
     if args.command == "verify":
-        if not args.archive:
-            parser.error("--archive is required")
-        path = Path(args.archive)
+        path = Path(args.archive) if args.archive else Path(args.output) / ("arctic-console-" + config["version"] + ".zip")
+        if path.stat().st_size != len(archive_bytes(files)):
+            raise ValueError("Downloaded archive size differs from the deterministic package")
         data = path.read_bytes()
-        checksum = Path(str(path) + ".sha256").read_text(encoding="ascii").split()
+        sidecar = Path(str(path) + ".sha256")
+        if sidecar.stat().st_size > 512:
+            raise ValueError("Invalid checksum file size")
+        checksum = sidecar.read_text(encoding="ascii").split()
         if len(checksum) != 2 or checksum[1] != path.name or checksum[0] != hashlib.sha256(data).hexdigest():
             raise ValueError("ZIP checksum does not match")
         verify_bytes(data, files)
@@ -109,24 +122,21 @@ def main():
     # Write only named build files; never clear an arbitrary output directory.
     output.mkdir(parents=True, exist_ok=True)
     if args.command == "site":
+        if any(output.iterdir()):
+            raise ValueError("Site output directory must be new or empty; refusing to publish stale files")
         for name, data in files.items():
-            target = output / name
-            if not target.resolve().is_relative_to(output):
-                raise ValueError("Output link escapes the distribution directory")
-            target.parent.mkdir(parents=True, exist_ok=True)
-            target.write_bytes(data)
-        (output / "index.html").write_bytes(files["evidence-check.html"])
+            write_output(output, name, data)
+        write_output(output, "index.html", files["evidence-check.html"])
         for name in ["DISCLAIMER", "LICENSING", "PRIVACY", "AUTHORS", "SECURITY", "REFERENCES", "THIRD_PARTY"]:
-            (output / (name + ".txt")).write_bytes(files[name + ".md"])
-        (output / "LICENSE.txt").write_bytes(files["LICENSE"])
+            write_output(output, name + ".txt", files[name + ".md"])
+        write_output(output, "LICENSE.txt", files["LICENSE"])
         print("Prepared hosted files from committed release inputs.")
         return
     data = archive_bytes(files)
     verify_bytes(data, files)
     filename = "arctic-console-" + config["version"] + ".zip"
-    (output / filename).write_bytes(data)
-    (output / (filename + ".sha256")).write_text(
-        hashlib.sha256(data).hexdigest() + "  " + filename + "\n", encoding="ascii", newline="\n")
+    write_output(output, filename, data)
+    write_output(output, filename + ".sha256", (hashlib.sha256(data).hexdigest() + "  " + filename + "\n").encode("ascii"))
     print(filename + ": " + str(len(files)) + " verified files; SHA-256 " + hashlib.sha256(data).hexdigest())
 
 if __name__ == "__main__":

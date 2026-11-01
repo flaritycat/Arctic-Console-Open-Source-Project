@@ -2,13 +2,13 @@
 
 Evidence Check compares a file you received with the SHA-256 fingerprint recorded for that file. A fingerprint is a 64-character value calculated from the file’s bytes. A successful check helps you establish that your copy agrees with the reference used for the case.
 
-This guide covers Evidence Check 0.1.1, the software currently released in the public project. The full Investigation and Operations application remains in private review.
+This guide covers Evidence Check in version 0.2.0. To open an alert, review its evidence and write a handover, follow the [practice guide](practice-guide.md). The full Investigation and Operations application remains in private review.
 
 ## Start in your browser
 
 Open the hosted tool. It needs a file and a fingerprint from a trusted case record or source manifest. File contents are read locally in the browser. You can try the exercise below without a real case. [Open Evidence Check](https://flaritycat.github.io/Arctic-Console-Open-Source-Project/)
 
-To keep an offline copy, download `arctic-evidence-check-0.1.1.zip` from the release page. On Windows, right-click the ZIP, choose **Extract All**, then open `evidence-check.html` in the extracted folder. Keep the accompanying license, notices and sample with it. The HTML also contains the complete license and AI notice under **License and AI notice (available offline)**. Opening this saved HTML file requires a current browser with JavaScript enabled. [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.1)
+To keep an offline copy, download `arctic-console-0.2.0.zip` from the release page. On Windows, right-click the ZIP, choose **Extract All**, then open `evidence-check.html` in the extracted folder. Keep the accompanying license, notices and sample with it. The HTML also contains the complete license and AI notice under **License and AI notice (available offline)**. Opening this saved HTML file requires a current browser with JavaScript enabled. [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/arctic-console-v0.2.0)
 
 ## Complete your first check
 
@@ -77,3 +77,5 @@ For a reproducible software problem, record the browser version, tool version, s
 ## Data handling and legal notices
 
 Selected files are processed locally. The hosted page is served by GitHub Pages, which logs visitor IP addresses. Saved check records contain names and fingerprints that may be sensitive. [Data handling](../PRIVACY.md) · [Licensing scope](../LICENSING.md) · [AI and warranty notice](../DISCLAIMER.md)
+
+For the separate fictional alert, assessment and handover exercise, follow the [practice guide](practice-guide.md).

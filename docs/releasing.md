@@ -5,7 +5,7 @@ Maintainers need Git, Node.js 22 or newer and Python 3.11 or newer. The applicat
 ## Prepare a candidate
 
 1. Update `release.json` with the release version, tag and explicit source-to-package file mapping. Include every runtime file, applicable notice and relevant guide. No private source is implicitly included.
-2. Regenerate changed standalone HTML and notices. Run all tests described in the repository guide.
+2. Install test dependencies with `npm ci --ignore-scripts` and `npx playwright install chromium`. Run `npm run build` to regenerate the standalone HTML and notices. Run the generated-file, unit and browser checks in the [repository guide](repository-guide.md).
 3. Commit the intended files. The packager rejects a dirty checkout, untracked inputs, unsafe paths, symlinks and missing required notices.
 4. In a clean checkout of that commit, run:
 
@@ -22,7 +22,7 @@ Review the candidate, its tests, actual browser checks and open limitations. Cre
 
 Download both uploaded assets into a separate directory. From the clean tagged checkout run `python tools/release.py verify --archive <downloaded-zip>`. This compares the checksum, entire archive, manifest and every included byte with the committed inputs. A checksum is not a signature or a substitute for verifying the source tag.
 
-The Pages workflow runs the same source checks and prepares the hosted files using `python tools/release.py site --output dist/site`. Public hosting contains only the explicit package inputs, with Evidence Check also served as `index.html`.
+The Pages workflow runs the same source checks and prepares the hosted files using `python tools/release.py site --output dist/site`. Use a new or empty site directory; stale files must not be published. The site contains the package files, an Evidence Check index and text aliases for the legal notices.
 
 ## Restore a previous version
 

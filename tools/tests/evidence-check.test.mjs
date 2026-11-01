@@ -115,7 +115,7 @@ test("downloads a check record and prevents exporting it after the input changes
   assert.equal(downloads[0].download, "arctic-evidence-check.json");
   const record = JSON.parse(await blobs[0].text());
   assert.equal(record.schema_version, 1);
-  assert.equal(record.tool_version, "0.1.1");
+  assert.equal(record.tool_version, "0.2.0");
   assert.equal(record.recorded_sha256, reference);
   assert.equal(record.calculated_sha256, reference);
   assert.equal(record.file_size_bytes, sample.length);

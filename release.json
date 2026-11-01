@@ -5,7 +5,6 @@
   "files": {
     "tools/evidence-check.html": "evidence-check.html",
     "tools/examples/sample-observation.txt": "sample-observation.txt",
-    "docs/offline-readme.md": "README.md",
     "LICENSE": "LICENSE",
     "DISCLAIMER.md": "DISCLAIMER.md",
     "LICENSING.md": "LICENSING.md",
@@ -21,6 +20,14 @@
     "docs/repository-guide.md": "docs/repository-guide.md",
     "docs/legal-review.md": "docs/legal-review.md",
     "third_party/actions.json": "third_party/actions.json",
-    "release.json": "release.json"
+    "release.json": "release.json",
+    "OFFLINE.md": "README.md",
+    "tools/practice.html": "practice.html",
+    "docs/releasing.md": "docs/releasing.md",
+    "docs/practice-guide.md": "docs/practice-guide.md",
+    "docs/practice-case.md": "docs/practice-case.md",
+    "third_party/development.json": "third_party/development.json",
+    "package-lock.json": "package-lock.json",
+    "docs/release-0.2.0.md": "docs/release-0.2.0.md"
   }
 }

@@ -4,11 +4,15 @@ Reviewed on 1 November 2026 for the public Evidence Check repository.
 
 ## What the public download contains
 
-Evidence Check 0.1.1 contains the project's HTML, JavaScript and CSS, an invented observation sample, the Apache-2.0 license and accompanying notices. The complete license and AI notice are also embedded in the HTML for standalone use. There are no downloaded JavaScript libraries, fonts, map layers, Arctic observations or third-party images in the tool. The browser implements SHA-256 through Web Crypto; the browser itself is installed separately. Tests and notice tooling use Node.js standard modules. Node.js is a development prerequisite and is not shipped in the offline ZIP. [Browser API](https://www.w3.org/TR/WebCryptoAPI/) · [Node.js notices](https://github.com/nodejs/node/blob/v24.19.0/LICENSE)
+Arctic Console 0.2.0 contains Evidence Check and the fictional practice case: project-developed HTML, JavaScript and CSS, synthetic examples, the Apache-2.0 license and accompanying notices. The complete license and AI notice are embedded in both HTML tools. There are no downloaded runtime JavaScript libraries, fonts, map layers, real Arctic observations or third-party images in either tool. The browser implements SHA-256 through Web Crypto and is installed separately. Node.js and Python are development prerequisites and are not shipped in the offline ZIP. [Browser API](https://www.w3.org/TR/WebCryptoAPI/) · [Node.js notices](https://github.com/nodejs/node/blob/v24.19.0/LICENSE) · [Python license](https://docs.python.org/3.14/license.html)
 
 The full Investigation and Operations application, its dependencies and earlier diagrams remain outside this public repository while their publication rights are reviewed. Apache-2.0 in this repository does not grant rights to that separate material. [Project license](LICENSE) · [Contributors and AI assistance](AUTHORS.md)
 
 ## Build and hosting components
+
+Browser tests use **Playwright 1.60.0** and **playwright-core 1.60.0**, under [Apache-2.0 at the published source commit](https://github.com/microsoft/playwright/blob/87bb9ddbd78f329df18c2b24847bc9409240cd07/LICENSE). The lockfile also includes the optional macOS dependency **fsevents 2.3.2**, under [MIT](https://github.com/fsevents/fsevents/blob/a7f5d00939b74e141a73131468c4ce48ee0f2197/LICENSE). These packages include their own upstream notices and bundled dependency notices in their published distributions. They and the downloaded Chromium test browser are development tools, excluded from the offline release. Preserve their notices if redistributing those tools separately. [Exact development source register](third_party/development.json) · [Locked packages](package-lock.json)
+
+Packaging uses only Python standard-library modules. The practice builder and unit tests use Node.js standard modules. Neither build tool introduces a runtime package into the generated HTML.
 
 GitHub Actions runs the checks and GitHub Pages serves the tool. These services are separate from the offline application. Each action below is published under MIT; its bundled dependencies retain their own notices. The exact source and license links are recorded in [the action register](third_party/actions.json).
 

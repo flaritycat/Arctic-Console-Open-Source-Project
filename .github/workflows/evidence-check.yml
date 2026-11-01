@@ -13,18 +13,22 @@ permissions:
 jobs:
   check:
     runs-on: ubuntu-24.04
-    timeout-minutes: 5
+    timeout-minutes: 12
     steps:
       # actions/checkout v7.0.1
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
         with:
           persist-credentials: false
       - run: node tools/check-third-party.mjs
+      - run: npm ci --ignore-scripts
+      - run: node tools/build-practice.mjs --check
       - run: node tools/sync-legal-notices.mjs --check
       - run: node --test tools/tests/*.test.mjs
       - run: python3 -m unittest discover -s tools/tests -p 'test_*.py'
+      - run: npx playwright install --with-deps chromium
+      - run: npm run test:browser
       - run: python3 tools/release.py build --output dist
-      - run: python3 tools/release.py verify --archive dist/arctic-console-0.2.0.zip
+      - run: python3 tools/release.py verify
       - name: Prepare public files
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: python3 tools/release.py site --output dist/site

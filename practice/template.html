@@ -1,0 +1,78 @@
+<!doctype html>
+<!-- Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0 -->
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; base-uri 'none'; form-action 'none'">
+<title>Practice an assessment · Arctic Console</title>
+<style>/* PRACTICE_STYLE */</style></head><body>
+<a class="skip" href="#main">Skip to the assignment</a>
+<header class="top"><div class="wrap"><div class="brand">Arctic Console <span class="tag">Practice</span></div><button class="link" id="open-reader">Review a handover</button></div></header>
+<main class="wrap" id="main">
+<nav class="steps" aria-label="Practice progress"><ol>
+<li><button data-step="0" aria-current="step"><span>01</span>Alert</button></li>
+<li><button data-step="1"><span>02</span>Evidence</button></li>
+<li><button data-step="2"><span>03</span>Assessment</button></li>
+<li><button data-step="3"><span>04</span>Handover</button></li>
+</ol></nav>
+<p id="message" class="status" role="status"></p><div id="error" class="error" role="alert" tabindex="-1" hidden></div>
+<section class="panel" data-screen="0" aria-labelledby="heading-0">
+<div class="eyebrow">Fictional case · Northern Bay</div><h1 id="heading-0" tabindex="-1">Your first Arctic assessment.</h1>
+<p class="lead">A report shows a rise in ice concentration at surveyed points. Can you tell the next analyst what that means for the whole bay?</p>
+<div class="card task"><div class="eyebrow">An alert to investigate</div><h2>A rise from 40% to 60%</h2><p>The sample average changed between two days. Check where the readings came from before making a wider claim.</p>
+<p class="muted">You will review two short sources, write your assessment and prepare a handover that another person can open.</p>
+<button id="start">Open the alert</button></div>
+<p class="note">All places and observations in this case are invented. This is a local training exercise, not a live Operations service.</p>
+<details class="import"><summary>Resume a draft</summary><p>Choose a draft you downloaded from this practice. Nothing is uploaded.</p><label for="draft-file">Practice draft (JSON, up to 64 KiB)</label><input id="draft-file" type="file" accept=".json,application/json"></details>
+</section>
+<section class="panel" data-screen="1" aria-labelledby="heading-1" hidden>
+<div class="eyebrow">Read before deciding</div><h1 id="heading-1" tabindex="-1">What do the sources support?</h1>
+<p class="lead">Open each source. When you have read it, mark it reviewed. Pay attention to <strong>which locations</strong> were measured.</p>
+<div class="card"><h2>Source 1 · The observations</h2><p>Two daily averages from five fictional readings.</p>
+<details id="source-observations"><summary>Read the observation table</summary><div class="source-body">
+<table><caption>Invented ice-concentration readings</caption><thead><tr><th scope="col">Date, 2026</th><th scope="col">Points and readings</th><th scope="col">Mean</th></tr></thead><tbody>
+<tr><th scope="row">30 October</th><td>A: 20% · B: 40% · C: 60%</td><td>40%</td></tr>
+<tr><th scope="row">31 October</th><td>D: 50% · E: 70%</td><td>60%</td></tr></tbody></table>
+<p>The mean rose by 20 percentage points. The point labels changed too.</p>
+<button class="secondary" data-review="observations">Mark observations reviewed</button></div></details><p id="review-observations" class="hint">Not reviewed yet</p></div>
+<div class="card"><h2>Source 2 · How the sample was collected</h2><p>The scope and limits of the comparison.</p>
+<details id="source-sampling"><summary>Read the sampling note</summary><div class="source-body">
+<p>None of the first day's locations was revisited. There are only five readings, no bay-wide coverage and no uncertainty estimate.</p>
+<p class="note">A change between these sample means does not establish a change at matched locations or across the whole bay.</p>
+<button class="secondary" data-review="sampling">Mark sampling note reviewed</button></div></details><p id="review-sampling" class="hint">Not reviewed yet</p></div>
+<p id="review-progress" class="hint">0 of 2 sources reviewed</p><div class="actions"><button id="to-assessment">Write an assessment</button></div>
+</section>
+<section class="panel" data-screen="2" aria-labelledby="heading-2" hidden>
+<div class="eyebrow">Your judgment</div><h1 id="heading-2" tabindex="-1">Leave a useful assessment.</h1><p class="lead">Say what is supported, what is uncertain and what the next analyst should check.</p>
+<form id="assessment-form" class="card" novalidate>
+<label for="decision">What should happen next?</label><select id="decision" aria-describedby="decision-error"><option value="">Choose an action</option><option value="investigate">Check further</option><option value="monitor">Keep under review</option><option value="escalate">Ask for specialist review</option></select><p id="decision-error" class="field-error" hidden></p>
+<label for="finding">What can you say from this evidence?</label><p id="finding-hint" class="hint">Describe the observation and the area or sample it represents. Maximum 1,200 characters.</p><textarea id="finding" maxlength="1200" aria-describedby="finding-hint finding-error"></textarea><p id="finding-error" class="field-error" hidden></p>
+<label for="limitation">What is still uncertain?</label><p id="limitation-hint" class="hint">Explain one limit that changes how the finding can be used. Maximum 800 characters.</p><textarea id="limitation" maxlength="800" aria-describedby="limitation-hint limitation-error"></textarea><p id="limitation-error" class="field-error" hidden></p>
+<label for="next_check">What should the next analyst check?</label><p id="next_check-hint" class="hint">Give a concrete next step. Maximum 800 characters.</p><textarea id="next_check" maxlength="800" aria-describedby="next_check-hint next_check-error"></textarea><p id="next_check-error" class="field-error" hidden></p>
+<div class="actions"><button type="submit">Review the handover</button><button class="secondary" type="button" data-go="1">Revisit the evidence</button></div>
+</form><p class="note">Your draft is only in this open page. Download a draft if you want to close it and resume later.</p>
+</section>
+<section class="panel" data-screen="3" aria-labelledby="heading-3" hidden>
+<div class="eyebrow">Prepare, then share yourself</div><h1 id="heading-3" tabindex="-1">Check what you are handing over.</h1><p class="lead">Read your assessment once more. The file will include this case's evidence references and your exact words.</p>
+<div class="card"><h2>Northern Bay · Training handover</h2><dl id="author-summary"></dl></div>
+<p class="note">Downloading a file does not send it, notify anyone or transfer responsibility. Give the file to your reader through a channel you choose.</p>
+<div class="actions"><button id="download-handover">Download handover</button><button class="secondary" data-go="2">Edit assessment</button></div>
+<div id="handover-ready" class="success" hidden><h2>Handover file prepared</h2><p>No one has received or accepted it through this tool. Keep the downloaded file, then ask your reader to open this practice and select <strong>Review a handover</strong>.</p><a class="button secondary" href="?reader=1" target="_blank" rel="noopener">Try the reader role in a new tab</a></div>
+</section>
+<section class="panel" data-screen="reader" aria-labelledby="heading-reader" hidden>
+<div class="eyebrow">The receiving analyst</div><h1 id="heading-reader" tabindex="-1">Review someone else's handover.</h1><p class="lead">Open a practice handover file. Read the assessment against its sources and decide what you would check next.</p>
+<div class="card"><label for="handover-file">Practice handover (JSON, up to 64 KiB)</label><input id="handover-file" type="file" accept=".json,application/json"><p class="hint">The file stays on your device. Draft files belong under Resume a draft.</p></div>
+<div id="reader-result" hidden><p class="success">The record checksum and case references match this practice edition. This does not authenticate its author or prove the assessment is correct.</p>
+<div class="card"><h2>The saved assessment</h2><p id="reader-created" class="hint"></p><dl id="reader-summary"></dl></div>
+<div class="card"><h2>Check the sources yourself</h2><details><summary>Fictional observation table</summary><p id="reader-observations" class="source-text"></p></details><details><summary>Sampling note</summary><p id="reader-sampling" class="source-text"></p></details>
+<details><summary>What does the file check establish?</summary><p>A checksum detects a change that does not have a matching recalculated checksum. Anyone editing the JSON can also recalculate it. It is not a signature. Source references must match the built-in fictional case; interpretation still needs your review.</p><p id="reader-fingerprint" class="source-text hint"></p></details></div>
+<label class="check"><input id="reader-reviewed" type="checkbox">I have read the assessment and checked what its sources support.</label><div class="actions"><button id="finish-reader">Finish reader practice</button></div>
+<div id="reader-finished" class="success" hidden><h2>Reader practice complete on this device</h2><p>This does not notify the sender or record a real acknowledgement. In a live service, responsibility would need an authenticated, confirmed transition.</p>
+<details><summary>Reflect on the judgment</summary><p>The sample means differ, but the locations were not revisited. This case cannot establish a change across the whole bay. A file match also cannot establish that the author's interpretation is correct.</p></details></div></div>
+<div class="actions"><button class="secondary" id="return-author">Return to my practice</button></div>
+</section>
+<div class="actions" id="draft-actions"><button class="secondary" id="download-draft">Download draft</button><button class="link" id="reset">Start over</button></div>
+</main>
+<footer class="footer"><div class="wrap"><p>Arctic Console practice 0.2.0 · Fictional training only · No automatic saving or sending.</p><p><a href="evidence-check.html">Check an evidence file</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/PRIVACY.md">Data handling</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/docs/practice-guide.md">Practice guide</a></p>
+<!-- BEGIN EMBEDDED LEGAL NOTICES -->
+<!-- END EMBEDDED LEGAL NOTICES -->
+</div></footer>
+<script>/* PRACTICE_SCRIPT */</script></body></html>

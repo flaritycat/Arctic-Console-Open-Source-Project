@@ -14,7 +14,7 @@ Only submit material you have the authority to provide under its stated terms, i
 
 When adding an action, library, asset or data source, update [the third-party register](THIRD_PARTY.md), preserve its original notices and run `node tools/check-third-party.mjs`.
 
-When changing `LICENSE` or `DISCLAIMER.md`, run `node tools/sync-legal-notices.mjs --write` to update the complete notices carried inside the standalone HTML, then `node tools/sync-legal-notices.mjs --check` and `node --test tools/tests/*.test.mjs`. The generator copies the legal texts without interpreting them. Review their substance separately.
+For the practice workflow, edit the files under `practice/` and use the [case specification](docs/practice-case.md) as the test assignment. Install the pinned test dependencies with `npm ci --ignore-scripts` and `npx playwright install chromium`. Run `npm run build`, `npm run check:generated`, `npm test`, `npm run test:browser` and `python -m unittest discover -s tools/tests -p "test_*.py"`. The build copies the canonical legal texts into both standalone tools. Review any change to those texts separately. See [release qualification](docs/releasing.md) for packaging checks.
 
 Follow [the reference policy](REFERENCES.md): use source links for reference-only material and establish permission before copying it. Attribution alone does not make unlicensed material available under Apache-2.0.
 

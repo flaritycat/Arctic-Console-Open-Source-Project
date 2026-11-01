@@ -30,4 +30,18 @@ for (const file of assets?.files || []) {
   if (!file.license || !file.upstream) throw new Error("Missing provenance: " + file.path);
   if (file.license_file) await readFile(join(root, file.license_file));
 }
-console.log(count + " workflow action references and " + (assets?.files.length || 0) + " vendored file hashes verified.");
+const development = JSON.parse(await readFile(join(root, "third_party/development.json"), "utf8"));
+const lock = JSON.parse(await readFile(join(root, "package-lock.json"), "utf8"));
+const expected = new Map(development.packages.map(item => [item.name + "@" + item.version, item]));
+const found = new Set();
+for (const [location, entry] of Object.entries(lock.packages)) {
+  if (!location) continue;
+  const name = location.split("node_modules/").at(-1);
+  const id = name + "@" + entry.version;
+  const record = expected.get(id);
+  if (!entry.dev || !record || record.license !== entry.license || !record.source || !record.license_url)
+    throw new Error("Unreviewed dependency or license: " + id);
+  found.add(id);
+}
+if (found.size !== expected.size) throw new Error("Development register differs from the lockfile.");
+console.log(count + " action references, " + (assets?.files.length || 0) + " vendored hashes and " + found.size + " development package editions verified.");

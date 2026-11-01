@@ -1,5 +1,7 @@
 # Arctic Console field tools
 
+Open `practice.html` for the fictional alert-to-handover exercise. [Practice guide](docs/practice-guide.md)
+
 Open `evidence-check.html` in a current browser to compare a file with its recorded SHA-256. No installation or network connection is needed for the comparison.
 
 Use `sample-observation.txt` with:
