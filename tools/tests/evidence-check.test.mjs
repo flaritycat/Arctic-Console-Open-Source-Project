@@ -71,3 +71,24 @@ test("changing the input while bytes are being read discards the earlier result"
   assert.equal(get("result").hidden, true);
   assert.equal(get("compare").disabled, false);
 });
+
+test("checks empty files and recovers after a read failure", async () => {
+  const { get, check } = harness();
+  get("file").files = [new File([], "empty.txt")];
+  get("expected").value = "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855";
+  await check();
+  assert.equal(get("result").dataset.kind, "match");
+  get("file").files = [{ size: 0, arrayBuffer: async () => { throw Error("unreadable"); } }];
+  await check();
+  assert.equal(get("result").dataset.kind, "error");
+  assert.equal(get("compare").disabled, false);
+  get("file").files = [new File([], "empty.txt")];
+  await check();
+  assert.equal(get("result").dataset.kind, "match");
+});
+
+test("the in-page download contains exactly the published synthetic sample", () => {
+  const encoded = html.match(/href="data:text\/plain;base64,([^"]+)"/)[1];
+  assert.deepEqual(Buffer.from(encoded, "base64"), sample);
+  assert.ok(html.includes(reference));
+});
