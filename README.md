@@ -2,6 +2,8 @@
 
 Arctic Console is a project for analysts investigating Arctic observations and handing evidence to the next shift. This first public release contains **Evidence Check**, a standalone browser tool for comparing a received file with the SHA-256 fingerprint in a case record. The full investigation and Operations workbench is being prepared for a separate source release.
 
+[Open Evidence Check in your browser](https://flaritycat.github.io/Arctic-Console-Open-Source-Project/) and expand **Try a sample file**.
+
 ## Try Evidence Check offline
 
 1. Open [the Evidence Check source file](tools/evidence-check.html), choose **Download raw file** on GitHub, then double-click the saved `evidence-check.html`. It runs in your browser without installation.
@@ -18,6 +20,6 @@ The browser reads the file locally. A match verifies byte equality against the s
 
 ## Contribute
 
-The tool and sample are original contributions. The browser supplies SHA-256 through Web Crypto. The tool has no downloaded runtime dependencies. Tests use the standard Node.js test runner. The public workflow uses GitHub’s [checkout action](https://github.com/actions/checkout) under its [MIT license](https://github.com/actions/checkout/blob/main/LICENSE).
+The tool and sample are original contributions. The browser supplies SHA-256 through Web Crypto. The tool has no downloaded runtime dependencies. Tests use the standard Node.js test runner. GitHub Actions checks the tool on pull requests. After a successful main-branch check, only the HTML and license are deployed. The workflow uses GitHub’s MIT-licensed [checkout](https://github.com/actions/checkout/blob/main/LICENSE), [upload-pages-artifact](https://github.com/actions/upload-pages-artifact/blob/main/LICENSE) and [deploy-pages](https://github.com/actions/deploy-pages/blob/main/LICENSE) actions.
 
 Project materials in this repository are released under Apache License 2.0. [License](LICENSE) · [Contributors and AI assistance](AUTHORS.md) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md)

@@ -2,9 +2,9 @@ name: Evidence Check
 on:
   push:
     branches: [main]
-    paths: ['tools/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'LICENSE', '.github/workflows/evidence-check.yml']
   pull_request:
-    paths: ['tools/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'LICENSE', '.github/workflows/evidence-check.yml']
   workflow_dispatch:
 
 permissions:
@@ -20,3 +20,32 @@ jobs:
         with:
           persist-credentials: false
       - run: node --test tools/tests/evidence-check.test.mjs
+      - name: Prepare public files
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        run: |
+          mkdir public
+          cp tools/evidence-check.html public/index.html
+          cp LICENSE public/LICENSE.txt
+      # actions/upload-pages-artifact v5.0.0
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+        with:
+          path: public
+  publish:
+    needs: check
+    if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    permissions:
+      pages: write
+      id-token: write
+    concurrency:
+      group: evidence-check-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      # actions/deploy-pages v5.0.1
+      - id: deploy
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346

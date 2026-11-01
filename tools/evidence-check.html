@@ -30,6 +30,8 @@ button:disabled {opacity:.65; cursor:wait}
 #result[data-kind=mismatch],#result[data-kind=error] {background:#fff0e8; border-color:#a34311}
 #result p {margin:.45rem 0}
 code {overflow-wrap:anywhere}
+details + details {margin-top:.65rem}
+a {color:#075c69}
 summary {cursor:pointer; font-weight:650}
 footer {border-top:1px solid #b9cecb; margin-top:1.5rem; padding-top:.7rem}
 </style>
@@ -51,6 +53,10 @@ footer {border-top:1px solid #b9cecb; margin-top:1.5rem; padding-top:.7rem}
 <p id="actual-line" hidden>Calculated SHA-256<br><code id="actual"></code></p>
 </section></div>
 </form>
+<details><summary>Try a sample file</summary>
+<p><a download="sample-observation.txt" href="data:text/plain;base64,QXJjdGljIENvbnNvbGUgdHJhaW5pbmcgc2FtcGxlClN5bnRoZXRpYyByZWNvcmQgMDQyClNlbnNvciBBIHJlcG9ydGVkIDcgdW5pdHMgYXQgbm9vbi4K">Save the synthetic observation</a>, then choose it in step 1. Copy this recorded fingerprint into step 2.</p>
+<p><code>6e6a178eaf3ff47416d5efffb5d8ac836f22d477d9b889b79fb920ca19a94857</code></p><p>After the first check, change one character in a copy of the file and compare again.</p>
+</details>
 <details><summary>What does a match tell me?</summary>
 <p>The fingerprint identifies the file’s bytes. A match lets you record that your copy agrees with the trusted reference. Check the source, date, coverage and interpretation separately.</p>
 </details>
