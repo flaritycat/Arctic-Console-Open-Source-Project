@@ -6,6 +6,11 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 
 [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.0) to keep a versioned copy with its license and sample.
 
+## Guides
+
+- [Use the software](docs/software-guide.md) for the sample exercise, real evidence checks, saved records and troubleshooting.
+- [Use the repository](docs/repository-guide.md) for releases, source files, updates and contributions.
+
 ## Try Evidence Check offline
 
 1. Open [the Evidence Check source file](tools/evidence-check.html), choose **Download raw file** on GitHub, then double-click the saved `evidence-check.html`. It runs in your browser without installation.
