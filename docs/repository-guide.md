@@ -26,23 +26,27 @@ The full Investigation and Operations source remains in private review while its
 | `.github/workflows/evidence-check.yml` | GitHub checks and publication of the hosted tool |
 | `CONTRIBUTING.md` and `SECURITY.md` | Contribution instructions and private security reporting |
 | `THIRD_PARTY.md` and `third_party/actions.json` | Third-party sources, license links and exact build-action versions |
-| `DISCLAIMER.md` | AI development disclosure, warranty and liability notice, and how to report attribution concerns |
+| `DISCLAIMER.md`, `LICENSING.md` and `PRIVACY.md` | AI disclosure, licensing scope and data handling |
+| `docs/legal-review.md` | Findings, corrections, primary sources and unresolved legal questions |
+| `tools/sync-legal-notices.mjs` | Keeps complete license and AI texts inside the standalone HTML |
 | `LICENSE` and `AUTHORS.md` | License terms and contributor credits |
 
 On GitHub, choose a file to read it. **History** shows its changes. The branch selector chooses the version of the project you are viewing.
 
 ## Download a release
 
-A release is a named version with downloadable files. Use **Releases**, open **Evidence Check 0.1.0**, then expand **Assets**. Download `arctic-evidence-check-0.1.0.zip` for the offline application. Its matching `.sha256` file records the ZIP’s checksum. GitHub also offers source archives containing the repository files. [Release page](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.0)
+A release is a named version with downloadable files. Use **Releases**, open **Evidence Check 0.1.1**, then expand **Assets**. Download `arctic-evidence-check-0.1.1.zip` for the offline application. Its matching `.sha256` file records the ZIP’s checksum. GitHub also offers source archives containing the repository files. [Release page](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.1)
 
 To check the offline ZIP on Windows, open PowerShell in the download folder and run the following commands.
 
 ```powershell
-Get-FileHash -Algorithm SHA256 -LiteralPath '.\arctic-evidence-check-0.1.0.zip'
-Get-Content -LiteralPath '.\arctic-evidence-check-0.1.0.zip.sha256'
+Get-FileHash -Algorithm SHA256 -LiteralPath '.\arctic-evidence-check-0.1.1.zip'
+Get-Content -LiteralPath '.\arctic-evidence-check-0.1.1.zip.sha256'
 ```
 
 Compare the full `Hash` with the first value in the checksum file. Upper- and lowercase letters mean the same value. Then extract the ZIP and open `evidence-check.html`. Keep the included license with redistributed copies.
+
+Version 0.1.1 includes the complete license and AI notice inside the HTML and accompanying records in the ZIP. The 0.1.0 release retains its original contents; later documentation does not retroactively add conditions.
 
 A release provides a fixed version. The `main` branch contains the current repository work. **Code → Download ZIP** downloads the selected branch.
 
@@ -83,7 +87,7 @@ For a documentation change in your own checkout, the commands could be:
 
 ```sh
 git switch -c codex/clarify-user-guide
-node --test tools/tests/evidence-check.test.mjs
+node --test tools/tests/*.test.mjs
 git diff --check
 git diff -- docs/software-guide.md
 git add docs/software-guide.md
@@ -95,8 +99,8 @@ Use a branch name and file paths appropriate to your change. Keep credentials an
 
 ## Understand checks and publication
 
-The **Evidence Check** workflow runs for changes to the tool, license, third-party register, reference record, disclaimer or workflow on `main` and in pull requests. It can also be started from the **Actions** tab by a maintainer. Other documentation-only changes may have no automatic run.
+The **Evidence Check** workflow runs for changes to the tool, license, third-party register, reference record, legal/data-handling notices, credits, security policy or workflow on `main` and in pull requests. It can also be started from the **Actions** tab by a maintainer. Other documentation-only changes may have no automatic run.
 
-A successful run for `main` packages the application HTML, license, third-party register, reference record and disclaimer and publishes them to GitHub Pages. The workflow’s **check** job verifies the tool; **publish** updates the hosted page. Release ZIPs are separate versioned downloads and retain the version they were created from.
+A successful run for `main` packages the application HTML, license, third-party register, reference record, disclaimer, licensing scope, data-handling notice, credits and security policy and publishes them to GitHub Pages. The workflow’s **check** job verifies the tool and embedded notice completeness; **publish** updates the hosted page. Release ZIPs are separate versioned downloads and retain the version they were created from.
 
 For a failed check, open **Actions**, select the run and inspect the failed step. Fix the cause and verify the correction before merging. Report security problems through the private reporting process. [Security policy](../SECURITY.md)

@@ -4,7 +4,7 @@ Reviewed on 1 November 2026 for the public Evidence Check repository.
 
 ## What the public download contains
 
-Evidence Check 0.1.0 contains the project's HTML, JavaScript and CSS, an invented observation sample and the Apache-2.0 license. There are no downloaded JavaScript libraries, fonts, map layers, Arctic observations or third-party images in the tool. The browser implements SHA-256 through Web Crypto; the browser itself is installed separately. Tests and the notice checker use Node.js standard modules. Node.js is a development prerequisite and is not shipped in the offline ZIP. [Browser API](https://www.w3.org/TR/WebCryptoAPI/) · [Node.js notices](https://github.com/nodejs/node/blob/v24.19.0/LICENSE)
+Evidence Check 0.1.1 contains the project's HTML, JavaScript and CSS, an invented observation sample, the Apache-2.0 license and accompanying notices. The complete license and AI notice are also embedded in the HTML for standalone use. There are no downloaded JavaScript libraries, fonts, map layers, Arctic observations or third-party images in the tool. The browser implements SHA-256 through Web Crypto; the browser itself is installed separately. Tests and notice tooling use Node.js standard modules. Node.js is a development prerequisite and is not shipped in the offline ZIP. [Browser API](https://www.w3.org/TR/WebCryptoAPI/) · [Node.js notices](https://github.com/nodejs/node/blob/v24.19.0/LICENSE)
 
 The full Investigation and Operations application, its dependencies and earlier diagrams remain outside this public repository while their publication rights are reviewed. Apache-2.0 in this repository does not grant rights to that separate material. [Project license](LICENSE) · [Contributors and AI assistance](AUTHORS.md)
 

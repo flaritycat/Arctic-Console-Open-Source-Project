@@ -2,9 +2,9 @@ name: Evidence Check
 on:
   push:
     branches: [main]
-    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'third_party/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'LICENSING.md', 'PRIVACY.md', 'AUTHORS.md', 'SECURITY.md', 'third_party/**', '.github/workflows/evidence-check.yml']
   pull_request:
-    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'third_party/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'LICENSING.md', 'PRIVACY.md', 'AUTHORS.md', 'SECURITY.md', 'third_party/**', '.github/workflows/evidence-check.yml']
   workflow_dispatch:
 
 permissions:
@@ -20,7 +20,8 @@ jobs:
         with:
           persist-credentials: false
       - run: node tools/check-third-party.mjs
-      - run: node --test tools/tests/evidence-check.test.mjs
+      - run: node tools/sync-legal-notices.mjs --check
+      - run: node --test tools/tests/*.test.mjs
       - name: Prepare public files
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         run: |
@@ -30,6 +31,10 @@ jobs:
           cp THIRD_PARTY.md public/THIRD_PARTY.txt
           cp REFERENCES.md public/REFERENCES.txt
           cp DISCLAIMER.md public/DISCLAIMER.txt
+          cp LICENSING.md public/LICENSING.txt
+          cp PRIVACY.md public/PRIVACY.txt
+          cp AUTHORS.md public/AUTHORS.txt
+          cp SECURITY.md public/SECURITY.txt
       # actions/upload-pages-artifact v5.0.0
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

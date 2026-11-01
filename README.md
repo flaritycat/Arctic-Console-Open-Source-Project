@@ -4,7 +4,7 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 
 [Open Evidence Check in your browser](https://flaritycat.github.io/Arctic-Console-Open-Source-Project/) and expand **Try a sample file**.
 
-[Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.0) to keep a versioned copy with its license and sample.
+[Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.1) to keep a versioned copy with its license, notices and sample.
 
 **AI development disclosure:** the project-developed code in this public version was created with substantial generative-AI assistance under human direction. It may contain errors, similarities to other works or attribution omissions. The [AI, warranty and liability notice](DISCLAIMER.md) explains the applicable limitations and how to report concerns. Third-party rights and mandatory legal obligations remain applicable.
 
@@ -25,10 +25,10 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 6e6a178eaf3ff47416d5efffb5d8ac836f22d477d9b889b79fb920ca19a94857
 ```
 
-The browser reads the file locally. A match verifies byte equality against the supplied reference. The analyst still needs to verify the reference’s provenance and the scientific interpretation.
+The browser calculates the fingerprint locally. A match means the calculated SHA-256 agrees with the supplied reference; it is not a guarantee of provenance or scientific validity. The hosted page uses GitHub Pages, which logs visitor IP addresses. [Data handling](PRIVACY.md)
 
 ## Contribute
 
-The tool and sample are original contributions. The browser supplies SHA-256 through Web Crypto. The tool has no downloaded runtime dependencies. Tests use the standard Node.js test runner. GitHub Actions checks the tool and action register on pull requests. After a successful main-branch check, the HTML, license and attribution register are deployed. [Third-party software and services, with pinned source and license links](THIRD_PARTY.md)
+The tool was developed for this project with AI assistance; the sample is fictional. This describes their development and does not certify exclusive originality or non-infringement. The browser supplies SHA-256 through Web Crypto. The tool has no downloaded runtime dependencies. Tests use the standard Node.js test runner. GitHub Actions checks the tool, embedded notices and action register on pull requests. After a successful main-branch check, the HTML and accompanying notices are deployed. [Third-party software and services, with pinned source and license links](THIRD_PARTY.md)
 
-Project materials in this repository are released under Apache License 2.0. [License](LICENSE) · [Third-party register](THIRD_PARTY.md) · [External references and permissions](REFERENCES.md) · [Contributors and AI assistance](AUTHORS.md) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md)
+Project-developed material is offered under Apache License 2.0 within the [documented licensing scope](LICENSING.md). Third-party material retains its own terms. [License](LICENSE) · [Third-party register](THIRD_PARTY.md) · [External references and permissions](REFERENCES.md) · [Contributors and AI assistance](AUTHORS.md) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md) · [Detailed legal review](docs/legal-review.md)
