@@ -1,6 +1,6 @@
 # Arctic Console
 
-Arctic Console is a project for analysts investigating Arctic observations and handing evidence to the next shift. This first public release contains **Evidence Check**, a standalone browser tool for comparing a received file with the SHA-256 fingerprint in a case record. The full investigation and Operations workbench is being prepared for a separate source release.
+Arctic Console is a project for analysts investigating Arctic observations and handing evidence to the next shift. This first public release contains **Evidence Check**, a standalone browser tool for comparing a received file with the SHA-256 fingerprint in a case record. The full investigation and Operations workbench remains in private review while permission to publish its earlier code and diagrams is confirmed.
 
 [Open Evidence Check in your browser](https://flaritycat.github.io/Arctic-Console-Open-Source-Project/) and expand **Try a sample file**.
 
@@ -8,7 +8,7 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 
 1. Open [the Evidence Check source file](tools/evidence-check.html), choose **Download raw file** on GitHub, then double-click the saved `evidence-check.html`. It runs in your browser without installation.
 2. Choose an evidence file up to 64 MiB and paste the SHA-256 from the trusted case record or provider manifest. Select **Check file**.
-3. If the fingerprints match, record the check alongside the source and edition. If they differ, confirm the intended edition with the sender before relying on the file.
+3. Use **Save this check** to download a JSON record for your assessment. It records the file name, size, UTC check time and both fingerprints. If the fingerprints match, keep the check alongside the source and edition. If they differ, confirm the intended edition with the sender before relying on the file.
 
 **Try a known example.** Download the [synthetic sample](tools/examples/sample-observation.txt) using **Download raw file** and compare it against the following fingerprint. Then edit one character in a copy and compare again. The second check should report a mismatch.
 

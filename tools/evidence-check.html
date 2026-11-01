@@ -23,6 +23,7 @@ input {display:block; font:inherit; width:100%; margin:.5rem 0 1.35rem; color:in
 input[type=text] {font-family:ui-monospace,monospace; border:1px solid #688589; border-radius:.3rem; padding:.7rem; font-size:1rem}
 input::file-selector-button {font:inherit; padding:.45rem .7rem; border:1px solid #688589; border-radius:.3rem; background:#f4f8f7; margin-right:.65rem}
 button {font:inherit; font-weight:700; color:white; background:#065b56; padding:.65rem 1.15rem; border:0; border-radius:.35rem; cursor:pointer}
+.secondary {background:white; color:#065b56; border:1px solid #065b56; margin-top:.65rem}
 button:disabled {opacity:.65; cursor:wait}
 :focus-visible {outline:3px solid #005ea8; outline-offset:3px}
 #result {border-left:4px solid #34707c; padding:.7rem 1rem; margin:1.25rem 0 0; background:#eff6f6}
@@ -51,6 +52,8 @@ footer {border-top:1px solid #b9cecb; margin-top:1.5rem; padding-top:.7rem}
 <div aria-live="polite" aria-atomic="true"><section id="result" hidden>
 <h2 id="title"></h2><p id="detail"></p>
 <p id="actual-line" hidden>Calculated SHA-256<br><code id="actual"></code></p>
+<button type="button" id="save" class="secondary" hidden>Save this check</button>
+<p id="save-hint" class="hint" hidden>Downloads a JSON record for your assessment. Keep the trusted case reference with it.</p>
 </section></div>
 </form>
 <details><summary>Try a sample file</summary>
@@ -69,10 +72,15 @@ const fileInput = document.getElementById("file");
 const expected = document.getElementById("expected");
 const compare = document.getElementById("compare");
 const result = document.getElementById("result");
+const save = document.getElementById("save");
 let revision = 0;
+let record = null;
 
 function clearResult() {
   revision++;
+  record = null;
+  save.hidden = true;
+  document.getElementById("save-hint").hidden = true;
   result.hidden = true;
   document.getElementById("actual").textContent = "";
   compare.disabled = false;
@@ -89,6 +97,17 @@ function show(kind, title, detail, digest = "") {
   result.dataset.kind = kind;
   result.hidden = false;
 }
+
+save.addEventListener("click", () => {
+  if (!record) return;
+  const blob = new Blob([JSON.stringify(record, null, 2) + "\n"], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const download = document.createElement("a");
+  download.href = url;
+  download.download = "arctic-evidence-check.json";
+  download.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
 
 form.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -118,6 +137,20 @@ form.addEventListener("submit", async (event) => {
     const output = await crypto.subtle.digest("SHA-256", bytes);
     if (revision !== request) return;
     const digest = Array.from(new Uint8Array(output), byte => byte.toString(16).padStart(2, "0")).join("");
+    record = {
+      schema_version: 1,
+      tool: "Arctic Console Evidence Check",
+      checked_at: new Date().toISOString(),
+      file_name: file.name,
+      file_size_bytes: file.size,
+      algorithm: "SHA-256",
+      recorded_sha256: reference,
+      calculated_sha256: digest,
+      result: digest === reference ? "match" : "mismatch",
+      reference_origin: "Supplied by the person performing this check",
+    };
+    save.hidden = false;
+    document.getElementById("save-hint").hidden = false;
     if (digest === reference) {
       show("match", "Fingerprints match", file.name + " agrees with the recorded fingerprint. You can record this check in your assessment.", digest);
     } else {

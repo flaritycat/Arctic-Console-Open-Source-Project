@@ -20,10 +20,24 @@ function harness() {
     });
   }
   const get = id => elements.get(id);
-  vm.runInNewContext(script, { document: { getElementById: get }, crypto: webcrypto });
+  const blobs = [];
+  const downloads = [];
+  vm.runInNewContext(script, {
+    document: {
+      getElementById: get,
+      createElement: () => ({ click() { downloads.push(this); } }),
+    },
+    crypto: webcrypto,
+    Blob,
+    URL: {
+      createObjectURL(blob) { blobs.push(blob); return "blob:local-test"; },
+      revokeObjectURL() {},
+    },
+    setTimeout(callback) { callback(); },
+  });
   get("file").files = [new File([sample], "sample-observation.txt")];
   get("expected").value = reference;
-  return { get, check: () => get("check").submit({ preventDefault() {} }) };
+  return { get, blobs, downloads, check: () => get("check").submit({ preventDefault() {} }) };
 }
 
 test("matches the published sample, including uppercase and surrounding whitespace", async () => {
@@ -91,4 +105,35 @@ test("the in-page download contains exactly the published synthetic sample", () 
   const encoded = html.match(/href="data:text\/plain;base64,([^"]+)"/)[1];
   assert.deepEqual(Buffer.from(encoded, "base64"), sample);
   assert.ok(html.includes(reference));
+});
+
+test("downloads a check record and prevents exporting it after the input changes", async () => {
+  const { get, check, blobs, downloads } = harness();
+  await check();
+  assert.equal(get("save").hidden, false);
+  get("save").click();
+  assert.equal(downloads[0].download, "arctic-evidence-check.json");
+  const record = JSON.parse(await blobs[0].text());
+  assert.equal(record.schema_version, 1);
+  assert.equal(record.recorded_sha256, reference);
+  assert.equal(record.calculated_sha256, reference);
+  assert.equal(record.file_size_bytes, sample.length);
+  assert.equal(record.file_name, "sample-observation.txt");
+  assert.equal(record.result, "match");
+  assert.ok(Number.isFinite(Date.parse(record.checked_at)));
+  get("expected").input();
+  assert.equal(get("save").hidden, true);
+  get("save").click();
+  assert.equal(downloads.length, 1);
+});
+
+test("a mismatch record preserves both fingerprints and the mismatching outcome", async () => {
+  const { get, check, blobs } = harness();
+  get("expected").value = "0".repeat(64);
+  await check();
+  get("save").click();
+  const record = JSON.parse(await blobs[0].text());
+  assert.equal(record.result, "mismatch");
+  assert.equal(record.recorded_sha256, "0".repeat(64));
+  assert.equal(record.calculated_sha256, reference);
 });
