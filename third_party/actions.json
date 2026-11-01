@@ -1,0 +1,42 @@
+{
+  "reviewed_on": "2026-11-01",
+  "scope": "Build and hosting services; action code is not included in the Evidence Check download. Dependencies within each action retain their own upstream notices.",
+  "actions": [
+    {
+      "repository": "actions/checkout",
+      "commit": "3d3c42e5aac5ba805825da76410c181273ba90b1",
+      "version": "v7.0.1",
+      "use": "direct",
+      "license": "MIT",
+      "license_url": "https://github.com/actions/checkout/blob/3d3c42e5aac5ba805825da76410c181273ba90b1/LICENSE",
+      "source_url": "https://github.com/actions/checkout/tree/3d3c42e5aac5ba805825da76410c181273ba90b1"
+    },
+    {
+      "repository": "actions/upload-pages-artifact",
+      "commit": "fc324d3547104276b827a68afc52ff2a11cc49c9",
+      "version": "v5.0.0",
+      "use": "direct",
+      "license": "MIT",
+      "license_url": "https://github.com/actions/upload-pages-artifact/blob/fc324d3547104276b827a68afc52ff2a11cc49c9/LICENSE",
+      "source_url": "https://github.com/actions/upload-pages-artifact/tree/fc324d3547104276b827a68afc52ff2a11cc49c9"
+    },
+    {
+      "repository": "actions/deploy-pages",
+      "commit": "368f82528645a54fb793d4d04e342629a3f51346",
+      "version": "v5.0.1",
+      "use": "direct",
+      "license": "MIT",
+      "license_url": "https://github.com/actions/deploy-pages/blob/368f82528645a54fb793d4d04e342629a3f51346/LICENSE",
+      "source_url": "https://github.com/actions/deploy-pages/tree/368f82528645a54fb793d4d04e342629a3f51346"
+    },
+    {
+      "repository": "actions/upload-artifact",
+      "commit": "bbbca2ddaa5d8feaa63e36b76fdaad77386f024f",
+      "version": "v7.0.0",
+      "use": "called by actions/upload-pages-artifact",
+      "license": "MIT",
+      "license_url": "https://github.com/actions/upload-artifact/blob/bbbca2ddaa5d8feaa63e36b76fdaad77386f024f/LICENSE",
+      "source_url": "https://github.com/actions/upload-artifact/tree/bbbca2ddaa5d8feaa63e36b76fdaad77386f024f"
+    }
+  ]
+}

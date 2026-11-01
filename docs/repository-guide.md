@@ -25,6 +25,7 @@ The full Investigation and Operations source remains in private review while its
 | `tools/tests/evidence-check.test.mjs` | Automated checks for results, errors, stale inputs and saved records |
 | `.github/workflows/evidence-check.yml` | GitHub checks and publication of the hosted tool |
 | `CONTRIBUTING.md` and `SECURITY.md` | Contribution instructions and private security reporting |
+| `THIRD_PARTY.md` and `third_party/actions.json` | Third-party sources, license links and exact build-action versions |
 | `LICENSE` and `AUTHORS.md` | License terms and contributor credits |
 
 On GitHub, choose a file to read it. **History** shows its changes. The branch selector chooses the version of the project you are viewing.
@@ -93,8 +94,8 @@ Use a branch name and file paths appropriate to your change. Keep credentials an
 
 ## Understand checks and publication
 
-The **Evidence Check** workflow runs for changes to the tool, license or workflow on `main` and in pull requests. It can also be started from the **Actions** tab by a maintainer. Documentation-only changes may have no automatic run.
+The **Evidence Check** workflow runs for changes to the tool, license, third-party register or workflow on `main` and in pull requests. It can also be started from the **Actions** tab by a maintainer. Documentation-only changes may have no automatic run.
 
-A successful run for `main` packages the application HTML and license and publishes them to GitHub Pages. The workflow’s **check** job verifies the tool; **publish** updates the hosted page. Release ZIPs are separate versioned downloads and retain the version they were created from.
+A successful run for `main` packages the application HTML, license and third-party register and publishes them to GitHub Pages. The workflow’s **check** job verifies the tool; **publish** updates the hosted page. Release ZIPs are separate versioned downloads and retain the version they were created from.
 
 For a failed check, open **Actions**, select the run and inspect the failed step. Fix the cause and verify the correction before merging. Report security problems through the private reporting process. [Security policy](../SECURITY.md)
