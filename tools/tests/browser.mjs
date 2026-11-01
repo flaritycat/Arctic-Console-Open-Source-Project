@@ -29,6 +29,16 @@ async function session(name, run, width = 1100) {
     passed++; console.log("PASS " + name);
   } finally { await context.close(); }
 }
+async function assertFits(page) {
+  const overflow = await page.evaluate(() => {
+    if (document.documentElement.scrollWidth <= innerWidth) return [];
+    return Array.from(document.querySelectorAll("body *"))
+      .filter(e => e.getBoundingClientRect().right > innerWidth)
+      .slice(0, 10).map(e => ({ tag: e.tagName, id: e.id, class: e.className, right: e.getBoundingClientRect().right }));
+  });
+  assert.deepEqual(overflow, [], "Visible content must fit the viewport: " + JSON.stringify(overflow));
+  assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), "Page reflows without horizontal scrolling");
+}
 async function evidence(page) {
   await page.getByRole("button", { name: "Open the alert", exact: true }).click();
   for (const [summary, button] of [["Read the observation table", "Mark observations reviewed"], ["Read the sampling note", "Mark sampling note reviewed"]]) {
@@ -140,7 +150,7 @@ try {
   });
   for (const width of [320, 390, 1280]) await session("responsive and keyboard sequence at " + width, async page => {
     await page.screenshot({ path: resolve(output, "practice-start-" + width + ".png"), fullPage: true });
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await assertFits(page);
     await evidence(page);
     await page.locator("#decision").focus();
     for (const expected of ["finding", "limitation", "next_check"]) {
@@ -149,7 +159,7 @@ try {
     }
     await fill(page);
     if (width === 1280) await page.addStyleTag({ content: "html { font-size:200% }" });
-    assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth));
+    await assertFits(page);
     await page.screenshot({ path: resolve(output, "practice-assessment-" + width + ".png"), fullPage: true });
   }, width);
   console.log(passed + " browser scenarios passed.");

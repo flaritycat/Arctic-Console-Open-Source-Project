@@ -19,7 +19,7 @@ h2{font-size:1.25rem;line-height:1.3;margin:.2rem 0 .7rem}h3{font-size:1.04rem;m
 .task{border-left:4px solid #087567}.actions{display:flex;gap:.7rem;flex-wrap:wrap;align-items:center;margin-top:1.2rem}
 .note{border-left:3px solid #729b94;padding:.55rem .9rem;background:#e5eeeb;font-size:.94rem}.error{border-left:4px solid #a44021;background:#fff0e8;padding:.65rem .9rem;color:#762d16;margin:.7rem 0}
 .success{border-left:4px solid #146b4e;background:#e1f1e9;padding:.65rem .9rem}
-nav.steps ol{display:grid;grid-template-columns:repeat(4,1fr);list-style:none;padding:0;margin:0 0 1.8rem;gap:.45rem}
+nav.steps ol{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));list-style:none;padding:0;margin:0 0 1.8rem;gap:.45rem}
 .steps button{width:100%;text-align:left;padding:.55rem .65rem;font-size:.88rem;background:transparent;color:#385b61;border-color:#b3c9c4;border-radius:.35rem}
 .steps button[aria-current=step]{background:#173f48;color:white;border-color:#173f48}
 .steps span{display:block;font-size:.7rem;letter-spacing:.05em;text-transform:uppercase}
@@ -38,6 +38,7 @@ dl{margin:0}dt{font-size:.8rem;font-weight:750;text-transform:uppercase;letter-s
 #legal-notices pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit}
 .status:empty{min-height:0;margin:0}.success{margin:.8rem 0}
 @media(max-width:560px){.wrap{padding-left:1rem;padding-right:1rem}.two{grid-template-columns:1fr}main{padding-top:1.3rem!important}.steps button{font-size:.8rem;padding:.45rem}.top .wrap{align-items:flex-start}.brand{max-width:11rem;font-size:.75rem}.actions button{flex-grow:1}.card{padding:1rem}}
+@media(max-width:26em){nav.steps ol{grid-template-columns:repeat(2,minmax(0,1fr));gap:.35rem}.steps button{display:flex;align-items:baseline;gap:.4rem;min-height:2.65rem;overflow-wrap:anywhere}.steps span{flex:none}}
 @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style></head><body>
 <a class="skip" href="#main">Skip to the assignment</a>
