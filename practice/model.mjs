@@ -1,5 +1,5 @@
 // Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0
-export const VERSION = "0.2.0";
+export const VERSION = "0.2.1";
 export const MAX_FILE_BYTES = 64 * 1024;
 export const CASE = {
   id: "northern-bay-001", revision: 1, title: "Did the ice increase across the bay?",
@@ -71,7 +71,7 @@ export async function parseRecord(text, expectedKind) {
   keys(record, ["payload", "sha256"]);
   const p = record.payload;
   keys(p, ["schema_version", "kind", "training", "tool_version", "case_id", "case_revision", "created_at", "evidence", "state"]);
-  if (p.schema_version !== 1 || p.training !== true || p.tool_version !== VERSION || p.case_id !== CASE.id || p.case_revision !== CASE.revision)
+  if (p.schema_version !== 1 || p.training !== true || !["0.2.0", VERSION].includes(p.tool_version) || p.case_id !== CASE.id || p.case_revision !== CASE.revision)
     throw new Error("This file belongs to an unsupported practice edition. Use the matching version of the tool.");
   if (!["draft", "handover"].includes(p.kind)) throw new Error("Unsupported record kind.");
   if (p.kind !== expectedKind) throw new Error(p.kind === "draft" ? "This is a draft. Use Resume a draft to continue writing it." : "This is a handover. Use Review a handover to read it.");

@@ -9,7 +9,7 @@ A repository is the project’s versioned collection of files on GitHub. Arctic 
 | Try the software | Open the hosted tool and follow the sample exercise in the software guide. |
 | Keep a tested offline copy | Download the named ZIP from a release. |
 | Read or change the code | Browse the files on GitHub or clone the repository. |
-| Report a problem | Open an issue with a small reproduction. |
+| Report a problem | [Report a bug](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/issues/new?template=bug.yml) or [suggest one improvement](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/issues/new?template=small-task.yml). |
 | Contribute a fix | Create a branch, verify the change and open a pull request. |
 
 The full Investigation and Operations source remains in private review while its earlier code and diagram rights are confirmed. Public contributions should use material whose publication and license you can establish.
@@ -38,13 +38,13 @@ On GitHub, choose a file to read it. **History** shows its changes. The branch s
 
 ## Download a release
 
-A release is a named version with downloadable files. Use **Releases**, open **Arctic Console 0.2.0**, then expand **Assets**. Download `arctic-console-0.2.0.zip` for the offline application. Its matching `.sha256` file records the ZIP’s checksum. GitHub also offers source archives containing the repository files. [Release page](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/arctic-console-v0.2.0)
+A release is a named version with downloadable files. Use **Releases**, open **Arctic Console 0.2.1**, then expand **Assets**. Download `arctic-console-0.2.1.zip` for the offline application. Its matching `.sha256` file records the ZIP’s checksum. GitHub also offers source archives containing the repository files. [Release page](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/arctic-console-v0.2.1)
 
 To check the offline ZIP on Windows, open PowerShell in the download folder and run the following commands.
 
 ```powershell
-Get-FileHash -Algorithm SHA256 -LiteralPath '.\arctic-console-0.2.0.zip'
-Get-Content -LiteralPath '.\arctic-console-0.2.0.zip.sha256'
+Get-FileHash -Algorithm SHA256 -LiteralPath '.\arctic-console-0.2.1.zip'
+Get-Content -LiteralPath '.\arctic-console-0.2.1.zip.sha256'
 ```
 
 Compare the full `Hash` with the first value in the checksum file. Upper- and lowercase letters mean the same value. Then extract the ZIP. Open `practice.html` for the assignment or `evidence-check.html` for a file check. Keep the included license with redistributed copies.

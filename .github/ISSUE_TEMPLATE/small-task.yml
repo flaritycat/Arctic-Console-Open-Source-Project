@@ -1,0 +1,30 @@
+name: Propose a small improvement
+description: Identify one analyst task or documentation step that could be easier.
+title: "[Improvement] "
+body:
+  - type: markdown
+    attributes:
+      value: "Use synthetic examples. Keep participant sheets, handover files, security details and private application material out of public issues."
+  - type: textarea
+    id: task
+    attributes:
+      label: What was the person trying to do, and where did they get stuck?
+    validations:
+      required: true
+  - type: dropdown
+    id: basis
+    attributes:
+      label: What is this based on?
+      options:
+        - My own use
+        - Direct observation reported without identifying details
+        - A scripted engineering check
+        - A proposed improvement not yet tested
+    validations:
+      required: true
+  - type: textarea
+    id: success
+    attributes:
+      label: What small change would help, and how could someone check it?
+    validations:
+      required: true

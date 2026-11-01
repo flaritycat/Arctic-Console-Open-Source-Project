@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Report a vulnerability privately
+    url: https://github.com/flaritycat/Arctic-Console-Open-Source-Project/security/advisories/new
+    about: Report security details through the private channel.
+  - name: Licensing or attribution question
+    url: https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/REFERENCES.md
+    about: Check the reference policy before posting or submitting material.

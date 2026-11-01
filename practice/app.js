@@ -7,13 +7,14 @@ let revision = 0;
 let importToken = 0;
 let exporting = false;
 let readerRecord = null;
+let validatingAssessment = false;
 const fields = ["decision", "finding", "limitation", "next_check"];
 
 function message(text = "") { byId("message").textContent = text; }
-function error(text = "") {
+function error(text = "", focus = true) {
   byId("error").textContent = text;
   byId("error").hidden = !text;
-  if (text) byId("error").focus();
+  if (text && focus) byId("error").focus();
 }
 function hasWork() { return state.reviewed.length > 0 || fields.some(key => state.assessment[key]); }
 function invalidate() {
@@ -62,25 +63,29 @@ function show(next, focus = true) {
   drawProgress();
   if (focus) byId("heading-" + next).focus();
 }
-function clearFieldErrors() {
+function renderFieldErrors(problems) {
   for (const key of fields) {
-    byId(key).removeAttribute("aria-invalid");
-    byId(key + "-error").hidden = true;
-    byId(key + "-error").textContent = "";
+    const field = byId(key), hint = byId(key + "-error");
+    const problem = problems[key] || "";
+    if (problem) field.setAttribute("aria-invalid", "true");
+    else field.removeAttribute("aria-invalid");
+    if (hint.textContent !== problem) hint.textContent = problem;
+    hint.hidden = !problem;
   }
 }
+function clearFieldErrors() {
+  validatingAssessment = false;
+  renderFieldErrors({});
+}
 function showErrors() {
-  clearFieldErrors();
   const problems = assessmentErrors(state);
-  for (const key of fields) if (problems[key]) {
-    byId(key).setAttribute("aria-invalid", "true");
-    byId(key + "-error").textContent = problems[key];
-    byId(key + "-error").hidden = false;
-  }
   if (problems.evidence) { error(problems.evidence); return; }
-  if (Object.keys(problems).length) {
-    error("Your draft is still here. Complete the marked fields before preparing a handover.");
-    byId(fields.find(key => problems[key])).focus();
+  validatingAssessment = true;
+  renderFieldErrors(problems);
+  const first = fields.find(key => problems[key]);
+  if (first) {
+    error("Your draft is still here. Complete the marked fields before preparing a handover.", false);
+    byId(first).focus();
   }
 }
 function download(record, name) {
@@ -147,13 +152,19 @@ async function importRecord(input, kind) {
 }
 for (const key of fields) byId(key).addEventListener("input", () => {
   state.assessment[key] = byId(key).value;
-  invalidate(); clearFieldErrors(); error(); drawProgress();
+  invalidate();
+  if (validatingAssessment) {
+    const problems = assessmentErrors(state);
+    renderFieldErrors(problems);
+    if (!Object.keys(problems).length) error();
+  } else error();
+  drawProgress();
 });
 document.querySelectorAll("[data-review]").forEach(button => button.addEventListener("click", () => {
   const id = button.dataset.review;
   if (!byId("source-" + id).open) return;
   if (!state.reviewed.includes(id)) state.reviewed.push(id);
-  invalidate(); drawProgress();
+  invalidate(); error(); drawProgress();
   message(state.reviewed.length === 2 ? "Both sources reviewed. You can write your assessment." : "Source marked reviewed. Read the other source next.");
 }));
 document.querySelectorAll("[data-step]").forEach(button => button.addEventListener("click", () => show(Number(button.dataset.step))));

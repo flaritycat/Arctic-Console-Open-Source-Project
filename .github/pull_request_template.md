@@ -1,10 +1,10 @@
 ## What changes for the analyst?
 
-Describe the task and the observable difference.
+Link the issue or work item (if any). Describe the task, the previous behavior and what now happens. State the acceptance check a reviewer can repeat.
 
 ## How did you verify it?
 
-List the checks actually run. For a workflow change, include the result for a first-time user or clearly identify the automated rehearsal.
+Give the version or environment, a synthetic example and the checks actually run. Note any checks still outstanding. For a workflow change, include the result for a first-time user or clearly identify the automated rehearsal.
 
 ## Attribution
 

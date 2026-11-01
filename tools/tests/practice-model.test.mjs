@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { readFile } from "node:fs/promises";
 import { blankState, assessmentErrors, validateState, makeRecord, parseRecord, canonical, sha256, MAX_FILE_BYTES } from "../../practice/model.mjs";
 
 const complete = () => ({ reviewed: ["observations", "sampling"], assessment: {
@@ -85,4 +86,18 @@ test("a download snapshots the state before asynchronous hashing", async () => {
   state.assessment.finding = "Changed while hashing";
   const record = await pending;
   assert.equal(record.payload.state.assessment.finding, complete().assessment.finding);
+});
+
+test("reads frozen 0.2.0 files without weakening checksum or completion checks", async () => {
+  for (const [kind, path] of [["draft", "./fixtures/northern-bay-draft-0.2.0.json"], ["handover", "../examples/northern-bay-review.json"]]) {
+    const bytes = await readFile(new URL(path, import.meta.url), "utf8");
+    const old = await parseRecord(bytes, kind);
+    assert.equal(old.payload.tool_version, "0.2.0");
+    if (kind === "draft") assert.equal(old.payload.state.assessment.next_check, "");
+    const current = await makeRecord(kind, old.payload.state);
+    assert.equal(current.payload.tool_version, "0.2.1");
+    assert.deepEqual((await parseRecord(JSON.stringify(current), kind)).payload.state, old.payload.state);
+    old.payload.state.assessment.finding += "!";
+    await assert.rejects(parseRecord(JSON.stringify(old), kind), /checksum/);
+  }
 });

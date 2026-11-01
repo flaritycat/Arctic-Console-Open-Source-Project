@@ -30,7 +30,7 @@ textarea{min-height:7rem;resize:vertical}textarea[aria-invalid=true],select[aria
 .hint{font-size:.88rem;color:#42616a;margin:.3rem 0}.field-error{font-size:.9rem;color:#8c3218;margin:.3rem 0}
 details{margin:.8rem 0}summary{cursor:pointer;font-weight:650;color:#174e50}details pre{white-space:pre-wrap;overflow-wrap:anywhere;font:inherit;font-size:.91rem}
 table{width:100%;border-collapse:collapse;margin:1rem 0}th,td{text-align:left;padding:.6rem .45rem;border-bottom:1px solid #cad9d4;font-size:.93rem}th{font-weight:650}
-.source-body{margin-top:.8rem}.source-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.source-body{margin-top:.8rem}.source-text,#reader-created{white-space:pre-wrap;overflow-wrap:anywhere}
 .two{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.two .card{margin:0}
 dl{margin:0}dt{font-size:.8rem;font-weight:750;text-transform:uppercase;letter-spacing:.04em;color:#42616a;margin:1rem 0 .3rem}dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
 .import{margin-top:1.5rem;border-top:1px solid #cad9d4;padding-top:.8rem}.check{display:flex;align-items:flex-start;gap:.65rem;font-weight:500}.check input{width:1.2rem;height:1.2rem;flex:none;margin-top:.2rem}
@@ -108,7 +108,7 @@ dl{margin:0}dt{font-size:.8rem;font-weight:750;text-transform:uppercase;letter-s
 </section>
 <div class="actions" id="draft-actions"><button class="secondary" id="download-draft">Download draft</button><button class="link" id="reset">Start over</button></div>
 </main>
-<footer class="footer"><div class="wrap"><p>Arctic Console practice 0.2.0 · Fictional training only · No automatic saving or sending.</p><p><a href="evidence-check.html">Check an evidence file</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/PRIVACY.md">Data handling</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/docs/practice-guide.md">Practice guide</a></p>
+<footer class="footer"><div class="wrap"><p>Arctic Console practice 0.2.1 · Fictional training only · No automatic saving or sending.</p><p><a href="evidence-check.html">Check an evidence file</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/PRIVACY.md">Data handling</a> · <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project/blob/main/docs/practice-guide.md">Practice guide</a></p>
 <!-- BEGIN EMBEDDED LEGAL NOTICES -->
 <details id="legal-notices">
 <summary>License and AI notice (available offline)</summary>
@@ -353,7 +353,7 @@ Reports help maintainers investigate and, where warranted, correct notices, repl
 <script>"use strict";
 (() => {
 // Copyright 2026 Arctic Console contributors. SPDX-License-Identifier: Apache-2.0
-const VERSION = "0.2.0";
+const VERSION = "0.2.1";
 const MAX_FILE_BYTES = 64 * 1024;
 const CASE = {
   id: "northern-bay-001", revision: 1, title: "Did the ice increase across the bay?",
@@ -425,7 +425,7 @@ async function parseRecord(text, expectedKind) {
   keys(record, ["payload", "sha256"]);
   const p = record.payload;
   keys(p, ["schema_version", "kind", "training", "tool_version", "case_id", "case_revision", "created_at", "evidence", "state"]);
-  if (p.schema_version !== 1 || p.training !== true || p.tool_version !== VERSION || p.case_id !== CASE.id || p.case_revision !== CASE.revision)
+  if (p.schema_version !== 1 || p.training !== true || !["0.2.0", VERSION].includes(p.tool_version) || p.case_id !== CASE.id || p.case_revision !== CASE.revision)
     throw new Error("This file belongs to an unsupported practice edition. Use the matching version of the tool.");
   if (!["draft", "handover"].includes(p.kind)) throw new Error("Unsupported record kind.");
   if (p.kind !== expectedKind) throw new Error(p.kind === "draft" ? "This is a draft. Use Resume a draft to continue writing it." : "This is a handover. Use Review a handover to read it.");
@@ -453,13 +453,14 @@ let revision = 0;
 let importToken = 0;
 let exporting = false;
 let readerRecord = null;
+let validatingAssessment = false;
 const fields = ["decision", "finding", "limitation", "next_check"];
 
 function message(text = "") { byId("message").textContent = text; }
-function error(text = "") {
+function error(text = "", focus = true) {
   byId("error").textContent = text;
   byId("error").hidden = !text;
-  if (text) byId("error").focus();
+  if (text && focus) byId("error").focus();
 }
 function hasWork() { return state.reviewed.length > 0 || fields.some(key => state.assessment[key]); }
 function invalidate() {
@@ -508,25 +509,29 @@ function show(next, focus = true) {
   drawProgress();
   if (focus) byId("heading-" + next).focus();
 }
-function clearFieldErrors() {
+function renderFieldErrors(problems) {
   for (const key of fields) {
-    byId(key).removeAttribute("aria-invalid");
-    byId(key + "-error").hidden = true;
-    byId(key + "-error").textContent = "";
+    const field = byId(key), hint = byId(key + "-error");
+    const problem = problems[key] || "";
+    if (problem) field.setAttribute("aria-invalid", "true");
+    else field.removeAttribute("aria-invalid");
+    if (hint.textContent !== problem) hint.textContent = problem;
+    hint.hidden = !problem;
   }
 }
+function clearFieldErrors() {
+  validatingAssessment = false;
+  renderFieldErrors({});
+}
 function showErrors() {
-  clearFieldErrors();
   const problems = assessmentErrors(state);
-  for (const key of fields) if (problems[key]) {
-    byId(key).setAttribute("aria-invalid", "true");
-    byId(key + "-error").textContent = problems[key];
-    byId(key + "-error").hidden = false;
-  }
   if (problems.evidence) { error(problems.evidence); return; }
-  if (Object.keys(problems).length) {
-    error("Your draft is still here. Complete the marked fields before preparing a handover.");
-    byId(fields.find(key => problems[key])).focus();
+  validatingAssessment = true;
+  renderFieldErrors(problems);
+  const first = fields.find(key => problems[key]);
+  if (first) {
+    error("Your draft is still here. Complete the marked fields before preparing a handover.", false);
+    byId(first).focus();
   }
 }
 function download(record, name) {
@@ -593,13 +598,19 @@ async function importRecord(input, kind) {
 }
 for (const key of fields) byId(key).addEventListener("input", () => {
   state.assessment[key] = byId(key).value;
-  invalidate(); clearFieldErrors(); error(); drawProgress();
+  invalidate();
+  if (validatingAssessment) {
+    const problems = assessmentErrors(state);
+    renderFieldErrors(problems);
+    if (!Object.keys(problems).length) error();
+  } else error();
+  drawProgress();
 });
 document.querySelectorAll("[data-review]").forEach(button => button.addEventListener("click", () => {
   const id = button.dataset.review;
   if (!byId("source-" + id).open) return;
   if (!state.reviewed.includes(id)) state.reviewed.push(id);
-  invalidate(); drawProgress();
+  invalidate(); error(); drawProgress();
   message(state.reviewed.length === 2 ? "Both sources reviewed. You can write your assessment." : "Source marked reviewed. Read the other source next.");
 }));
 document.querySelectorAll("[data-step]").forEach(button => button.addEventListener("click", () => show(Number(button.dataset.step))));

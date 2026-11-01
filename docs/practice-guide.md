@@ -34,7 +34,7 @@ After reviewing, tick the confirmation and select **Finish reader practice**. Co
 | Incomplete assessment | Complete the marked fields. Your other text remains present. |
 | Draft opened in the reader | Use **Resume a draft** on the Alert step instead. |
 | Handover opened as a draft | Use **Review a handover** instead. |
-| Unsupported practice edition | Open the version that produced the file. This release supports practice record schema 1, tool 0.2.0 and Northern Bay edition 1. |
+| Unsupported practice edition | Open the version that produced the file. This release supports practice record schema 1, Northern Bay edition 1 and files written by 0.2.0 or 0.2.1. For a new 0.2.1 file, use this release or its offline reader. |
 | Checksum or source mismatch | Obtain the intended file. Do not treat a recalculated checksum as proof of authenticity. |
 | File exceeds 64 KiB / invalid JSON | Choose the original small JSON download from this practice. |
 | Work changed during import | Choose the file again only if you still want to replace your current work. |

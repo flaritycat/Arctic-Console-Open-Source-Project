@@ -1,6 +1,6 @@
 # Public field-tool data handling
 
-This describes the public Arctic Console 0.2.0 field tools, not the separate private application.
+This describes the public Arctic Console 0.2.1 field tools, not the separate private application.
 
 ## Files and check records
 

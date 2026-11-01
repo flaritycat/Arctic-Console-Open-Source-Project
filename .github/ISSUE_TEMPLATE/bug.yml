@@ -1,0 +1,27 @@
+name: Report a reproducible problem
+description: Describe what went wrong using fictional material.
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: "This report is public. Leave out real cases, participant notes and personal details. For vulnerabilities use [private reporting](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/security/advisories/new)."
+  - type: input
+    id: environment
+    attributes:
+      label: Where did it happen?
+      description: Tool, release or commit, browser, and hosted or offline.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: How can a maintainer reproduce it?
+      description: Describe the task and shortest steps with the fictional example.
+    validations:
+      required: true
+  - type: textarea
+    id: result
+    attributes:
+      label: What did you expect, and what actually happened?
+    validations:
+      required: true

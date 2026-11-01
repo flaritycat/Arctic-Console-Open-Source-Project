@@ -12,7 +12,7 @@ Keep the first experience simple: one task, a clear next action, plain-language 
 
 | Area | Verified position | Evidence |
 | --- | --- | --- |
-| Public software | Version 0.2.0 includes Evidence Check and a fictional, offline alert-to-handover exercise with a separate reader. | [Release record](docs/release-0.2.0.md) |
+| Public software | Version 0.2.1 includes Evidence Check and a fictional, offline alert-to-handover exercise with a separate reader. | [Release record](docs/release-0.2.1.md) |
 | Public documentation | Software/repository guides, source references, AI disclosure, licensing scope and data-handling records are published. | [Guides](docs/software-guide.md) · [Legal review](docs/legal-review.md) |
 | Full application | Earlier investigation, assessment and handover implementation remains in private review. Existing engineering work should be assessed before scheduling replacement work. It is not a publicly released or field-qualified product. | [Permission record](REFERENCES.md) |
 | Human and scientific validation | No completed analyst cohort, independent scientific acceptance or authorized operational deployment is established by the public release record. | These remain explicit work items below. |
@@ -22,8 +22,8 @@ Keep the first experience simple: one task, a clear next action, plain-language 
 | Stage | Deliverable | Exit condition | Current status |
 | --- | --- | --- | --- |
 | 0. Public foundation | Evidence Check, guides and complete notices | Versioned download, verified notices and recorded engineering checks | Complete for 0.1.1 |
-| 1. Maintainable public release | Repeatable packaging, contribution intake and documented release decisions | A clean checkout reproduces the candidate package; checks catch missing notices; a contributor can follow the guide | Packaging delivered (P02); contributor intake (P03) remains |
-| 2. Browser practice case | Clearly labelled fictional alert → evidence → assessment → training handover | A beginner can complete the exercise without installation; a second reader can inspect the saved work; no simulated acceptance is presented as real delivery | Implemented and browser-tested (P04–P05); observed first use remains open (P06) |
+| 1. Maintainable public release | Repeatable packaging, contribution intake and documented release decisions | A clean checkout reproduces the candidate package; checks catch missing notices; a contributor can follow the guide | Complete for the public tools (P02–P03) |
+| 2. Browser practice case | Clearly labelled fictional alert → evidence → assessment → training handover | A beginner can complete the exercise without installation; a second reader can inspect the saved work; no simulated acceptance is presented as real delivery | Implemented and browser-tested (P04–P05); P06 observation materials ready; no human results recorded |
 | 3. Scoped investigation | Area/date/source/selection → reproducible finding or an explicit unavailable result | Qualified calculation and preserved citation; another analyst can reproduce the result or identify why it cannot be reproduced | Conditional |
 | 4. Shared Operations | Authenticated assignment, assessment, handover and acknowledgement | Ownership and version changes are server-confirmed; recovery and concurrent-edit checks pass | Conditional |
 | 5. Supervised pilot | One authorized team and deployment, one qualified data product | Observed task performance, independent domain review, restore/rollback evidence and a documented release decision | External dependencies open |
@@ -34,8 +34,8 @@ Scientific qualification, research preparation and release maintenance can progr
 
 ## Next execution order
 
-1. Exercise contributor intake from a fresh checkout and provide actionable templates for small contributions.
-2. Observe real first-time users and repair the specific points where they misunderstand or need help.
+1. Run the first observed author and reader round using the [session guide](docs/first-use-session.md).
+2. Review every unsuccessful attempt, fix the specific misunderstanding and retest with fresh participants.
 3. Resolve the source-reuse decision and review the existing private implementation against the acceptance criteria.
 4. Qualify one Arctic observation product and connect the supported investigation.
 5. Complete shared Operations and the supervised-pilot checks only when rights, participants and deployment are available.

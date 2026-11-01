@@ -1,0 +1,33 @@
+{
+  "payload": {
+    "schema_version": 1,
+    "kind": "draft",
+    "training": true,
+    "tool_version": "0.2.0",
+    "case_id": "northern-bay-001",
+    "case_revision": 1,
+    "created_at": "2026-11-01T12:00:00.000Z",
+    "evidence": [
+      {
+        "id": "observations",
+        "sha256": "fd63ec67572c333ff15ca5f7284241b55f09e6ac4c038e408a23b4b1b6f75a60"
+      },
+      {
+        "id": "sampling",
+        "sha256": "a4d49d1e7a4d3b349dbe7a5985140e86784f334b0ad5967ac0c63583abe11182"
+      }
+    ],
+    "state": {
+      "reviewed": [
+        "observations"
+      ],
+      "assessment": {
+        "decision": "monitor",
+        "finding": "Ice concentration increased across the whole bay.",
+        "limitation": "There are only two survey days in this report.",
+        "next_check": ""
+      }
+    }
+  },
+  "sha256": "1645fb39a4f6914b1cd68ee89ab61c9fb62e7596afc9e8eac061ddc9f7054a18"
+}

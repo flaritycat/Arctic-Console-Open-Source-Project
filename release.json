@@ -1,6 +1,6 @@
 {
-  "version": "0.2.0",
-  "tag": "arctic-console-v0.2.0",
+  "version": "0.2.1",
+  "tag": "arctic-console-v0.2.1",
   "repository": "flaritycat/Arctic-Console-Open-Source-Project",
   "files": {
     "tools/evidence-check.html": "evidence-check.html",
@@ -28,6 +28,11 @@
     "docs/practice-case.md": "docs/practice-case.md",
     "third_party/development.json": "third_party/development.json",
     "package-lock.json": "package-lock.json",
-    "docs/release-0.2.0.md": "docs/release-0.2.0.md"
+    "docs/release-0.2.0.md": "docs/release-0.2.0.md",
+    "docs/release-0.2.1.md": "docs/release-0.2.1.md",
+    "docs/first-use-session.md": "docs/first-use-session.md",
+    "docs/first-use-tasks.md": "docs/first-use-tasks.md",
+    "docs/first-use-scorecard.md": "docs/first-use-scorecard.md",
+    "tools/examples/northern-bay-review.json": "northern-bay-review.json"
   }
 }

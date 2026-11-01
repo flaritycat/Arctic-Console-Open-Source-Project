@@ -11,10 +11,10 @@ Maintainers need Git, Node.js 22 or newer and Python 3.11 or newer. The applicat
 
 ```sh
 python tools/release.py build --output dist
-python tools/release.py verify --archive dist/arctic-console-0.2.0.zip
+python tools/release.py verify
 ```
 
-Use the version from `release.json` in the archive name. Repeat the build in a second clean checkout of the same commit; the ZIP checksums must agree. The archive stores entries without compression, with fixed metadata, so compression-library versions and file timestamps do not affect its bytes. `BUILD.json` records the source commit, exact included paths and SHA-256 values.
+By default verification reads the archive named for the version in `release.json`. Repeat the build in a second clean checkout of the same commit; the ZIP checksums must agree. The archive stores entries without compression, with fixed metadata, so compression-library versions and file timestamps do not affect its bytes. `BUILD.json` records the source commit, exact included paths and SHA-256 values.
 
 ## Publish and verify
 

@@ -2,13 +2,13 @@
 
 Evidence Check compares a file you received with the SHA-256 fingerprint recorded for that file. A fingerprint is a 64-character value calculated from the file’s bytes. A successful check helps you establish that your copy agrees with the reference used for the case.
 
-This guide covers Evidence Check in version 0.2.0. To open an alert, review its evidence and write a handover, follow the [practice guide](practice-guide.md). The full Investigation and Operations application remains in private review.
+This guide covers Evidence Check in version 0.2.1. To open an alert, review its evidence and write a handover, follow the [practice guide](practice-guide.md). The full Investigation and Operations application remains in private review.
 
 ## Start in your browser
 
 Open the hosted tool. It needs a file and a fingerprint from a trusted case record or source manifest. File contents are read locally in the browser. You can try the exercise below without a real case. [Open Evidence Check](https://flaritycat.github.io/Arctic-Console-Open-Source-Project/)
 
-To keep an offline copy, download `arctic-console-0.2.0.zip` from the release page. On Windows, right-click the ZIP, choose **Extract All**, then open `evidence-check.html` in the extracted folder. Keep the accompanying license, notices and sample with it. The HTML also contains the complete license and AI notice under **License and AI notice (available offline)**. Opening this saved HTML file requires a current browser with JavaScript enabled. [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/arctic-console-v0.2.0)
+To keep an offline copy, download `arctic-console-0.2.1.zip` from the release page. On Windows, right-click the ZIP, choose **Extract All**, then open `evidence-check.html` in the extracted folder. Keep the accompanying license, notices and sample with it. The HTML also contains the complete license and AI notice under **License and AI notice (available offline)**. Opening this saved HTML file requires a current browser with JavaScript enabled. [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/arctic-console-v0.2.1)
 
 ## Complete your first check
 

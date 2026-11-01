@@ -2,6 +2,8 @@
 
 Open `practice.html` for the fictional alert-to-handover exercise. [Practice guide](docs/practice-guide.md)
 
+For an observed exercise use the [assignment card](docs/first-use-tasks.md). The synthetic `northern-bay-review.json` is a sample assessment to critique, not a model answer. [Facilitator guide](docs/first-use-session.md)
+
 Open `evidence-check.html` in a current browser to compare a file with its recorded SHA-256. No installation or network connection is needed for the comparison.
 
 Use `sample-observation.txt` with:
