@@ -100,6 +100,8 @@ Use a branch name and file paths appropriate to your change. Keep credentials an
 
 ## Understand checks and publication
 
+For repeatable ZIP creation, uploaded-asset verification and rollback, follow [the release procedure](releasing.md). It builds only the committed files explicitly listed in `release.json` and requires a clean checkout.
+
 The **Evidence Check** workflow runs for changes to the tool, license, third-party register, reference record, legal/data-handling notices, credits, security policy or workflow on `main` and in pull requests. It can also be started from the **Actions** tab by a maintainer. Other documentation-only changes may have no automatic run.
 
 A successful run for `main` packages the application HTML, license, third-party register, reference record, disclaimer, licensing scope, data-handling notice, credits and security policy and publishes them to GitHub Pages. The workflow’s **check** job verifies the tool and embedded notice completeness; **publish** updates the hosted page. Release ZIPs are separate versioned downloads and retain the version they were created from.

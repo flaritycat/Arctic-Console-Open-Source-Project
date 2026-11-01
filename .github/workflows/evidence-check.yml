@@ -2,9 +2,9 @@ name: Evidence Check
 on:
   push:
     branches: [main]
-    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'LICENSING.md', 'PRIVACY.md', 'AUTHORS.md', 'SECURITY.md', 'third_party/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'practice/**', 'docs/**', '*.md', 'LICENSE', 'release.json', 'package*.json', 'third_party/**', '.github/workflows/evidence-check.yml']
   pull_request:
-    paths: ['tools/**', 'LICENSE', 'THIRD_PARTY.md', 'REFERENCES.md', 'DISCLAIMER.md', 'LICENSING.md', 'PRIVACY.md', 'AUTHORS.md', 'SECURITY.md', 'third_party/**', '.github/workflows/evidence-check.yml']
+    paths: ['tools/**', 'practice/**', 'docs/**', '*.md', 'LICENSE', 'release.json', 'package*.json', 'third_party/**', '.github/workflows/evidence-check.yml']
   workflow_dispatch:
 
 permissions:
@@ -22,24 +22,17 @@ jobs:
       - run: node tools/check-third-party.mjs
       - run: node tools/sync-legal-notices.mjs --check
       - run: node --test tools/tests/*.test.mjs
+      - run: python3 -m unittest discover -s tools/tests -p 'test_*.py'
+      - run: python3 tools/release.py build --output dist
+      - run: python3 tools/release.py verify --archive dist/arctic-console-0.2.0.zip
       - name: Prepare public files
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
-        run: |
-          mkdir public
-          cp tools/evidence-check.html public/index.html
-          cp LICENSE public/LICENSE.txt
-          cp THIRD_PARTY.md public/THIRD_PARTY.txt
-          cp REFERENCES.md public/REFERENCES.txt
-          cp DISCLAIMER.md public/DISCLAIMER.txt
-          cp LICENSING.md public/LICENSING.txt
-          cp PRIVACY.md public/PRIVACY.txt
-          cp AUTHORS.md public/AUTHORS.txt
-          cp SECURITY.md public/SECURITY.txt
+        run: python3 tools/release.py site --output dist/site
       # actions/upload-pages-artifact v5.0.0
       - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
         if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'
         with:
-          path: public
+          path: dist/site
   publish:
     needs: check
     if: github.ref == 'refs/heads/main' && github.event_name != 'pull_request'

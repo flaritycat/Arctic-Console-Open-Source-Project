@@ -1,0 +1,26 @@
+{
+  "version": "0.2.0",
+  "tag": "arctic-console-v0.2.0",
+  "repository": "flaritycat/Arctic-Console-Open-Source-Project",
+  "files": {
+    "tools/evidence-check.html": "evidence-check.html",
+    "tools/examples/sample-observation.txt": "sample-observation.txt",
+    "docs/offline-readme.md": "README.md",
+    "LICENSE": "LICENSE",
+    "DISCLAIMER.md": "DISCLAIMER.md",
+    "LICENSING.md": "LICENSING.md",
+    "PRIVACY.md": "PRIVACY.md",
+    "AUTHORS.md": "AUTHORS.md",
+    "THIRD_PARTY.md": "THIRD_PARTY.md",
+    "REFERENCES.md": "REFERENCES.md",
+    "SECURITY.md": "SECURITY.md",
+    "CONTRIBUTING.md": "CONTRIBUTING.md",
+    "ROADMAP.md": "ROADMAP.md",
+    "docs/execution-plan.md": "docs/execution-plan.md",
+    "docs/software-guide.md": "docs/software-guide.md",
+    "docs/repository-guide.md": "docs/repository-guide.md",
+    "docs/legal-review.md": "docs/legal-review.md",
+    "third_party/actions.json": "third_party/actions.json",
+    "release.json": "release.json"
+  }
+}
