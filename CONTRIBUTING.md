@@ -11,3 +11,5 @@ In a pull request, describe the change and the checks you ran. Keep test evidenc
 When adding an action, library, asset or data source, update [the third-party register](THIRD_PARTY.md), preserve its original notices and run `node tools/check-third-party.mjs`.
 
 Follow [the reference policy](REFERENCES.md): use source links for reference-only material and establish permission before copying it. Attribution alone does not make unlicensed material available under Apache-2.0.
+
+The [AI development notice](DISCLAIMER.md) does not excuse missing permissions or required credits. Describe material AI assistance accurately; do not characterize third-party code as project-generated. Report suspected similarities or attribution omissions with the affected version and source evidence.

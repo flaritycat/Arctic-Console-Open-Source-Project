@@ -6,6 +6,8 @@ Arctic Console is a project for analysts investigating Arctic observations and h
 
 [Download the offline release](https://github.com/flaritycat/Arctic-Console-Open-Source-Project/releases/tag/evidence-check-v0.1.0) to keep a versioned copy with its license and sample.
 
+**AI development disclosure:** the project-developed code in this public version was created with substantial generative-AI assistance under human direction. It may contain errors, similarities to other works or attribution omissions. The [AI, warranty and liability notice](DISCLAIMER.md) explains the applicable limitations and how to report concerns. Third-party rights and mandatory legal obligations remain applicable.
+
 ## Guides
 
 - [Use the software](docs/software-guide.md) for the sample exercise, real evidence checks, saved records and troubleshooting.
