@@ -63,7 +63,7 @@ footer {border-top:1px solid #b9cecb; margin-top:1.5rem; padding-top:.7rem}
 <details><summary>What does a match tell me?</summary>
 <p>The fingerprint identifies the file’s bytes. A match lets you record that your copy agrees with the trusted reference. Check the source, date, coverage and interpretation separately.</p>
 </details>
-<footer>File contents stay in this browser. This tool works offline and clears the result when you change either input. <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project">Source and license</a>.</footer>
+<footer>Evidence Check 0.1.0. File contents stay in this browser. This tool works offline and clears the result when you change either input. <a href="https://github.com/flaritycat/Arctic-Console-Open-Source-Project">Source and license</a>.</footer>
 </main>
 <script>
 "use strict";
@@ -140,6 +140,7 @@ form.addEventListener("submit", async (event) => {
     record = {
       schema_version: 1,
       tool: "Arctic Console Evidence Check",
+      tool_version: "0.1.0",
       checked_at: new Date().toISOString(),
       file_name: file.name,
       file_size_bytes: file.size,
