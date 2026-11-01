@@ -26,3 +26,7 @@ The upload action's nested action reference was inspected in its [pinned action 
 Keep the Apache-2.0 license with copies of the application. If you add third-party code, assets, datasets or runtime packages, record their exact versions, source URLs, license texts, notices and any modifications here before releasing them. Preserve the upstream copyright and attribution in the shipped artifact. A package's short license label is evidence to investigate, not a substitute for its actual notice.
 
 Run `node tools/check-third-party.mjs` after changing a workflow or this register. It rejects unregistered or unpinned action references. Update the register and inspect the new upstream source and notices when changing a pin. For tool changes, also run `node --test tools/tests/evidence-check.test.mjs` and follow the [repository guide](docs/repository-guide.md).
+
+## Source references and permission
+
+See [the reference and permission record](REFERENCES.md) for materials whose rights require clarification. A reference gives credit; it does not grant reuse permission. A missing license file is assessed separately from a missing license declaration. Explicit upstream grants and their conditions remain controlling.

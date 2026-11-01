@@ -29,4 +29,4 @@ The browser reads the file locally. A match verifies byte equality against the s
 
 The tool and sample are original contributions. The browser supplies SHA-256 through Web Crypto. The tool has no downloaded runtime dependencies. Tests use the standard Node.js test runner. GitHub Actions checks the tool and action register on pull requests. After a successful main-branch check, the HTML, license and attribution register are deployed. [Third-party software and services, with pinned source and license links](THIRD_PARTY.md)
 
-Project materials in this repository are released under Apache License 2.0. [License](LICENSE) · [Third-party register](THIRD_PARTY.md) · [Contributors and AI assistance](AUTHORS.md) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md)
+Project materials in this repository are released under Apache License 2.0. [License](LICENSE) · [Third-party register](THIRD_PARTY.md) · [External references and permissions](REFERENCES.md) · [Contributors and AI assistance](AUTHORS.md) · [Contributing](CONTRIBUTING.md) · [Security reporting](SECURITY.md)
